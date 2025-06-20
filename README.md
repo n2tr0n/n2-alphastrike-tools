@@ -2,12 +2,12 @@
 
 > "Action served hot, at muzzle velocity!"
 
-A modern, streamlined toolkit for Alpha Strike Hex Play.
+A collection of tools for Battletech: Alpha Strike
 
 ---
 
 ## 🚀 Project Status
-This project is in early development. Features and UI are evolving rapidly—feedback and contributions are welcome!
+This project is in early development. Features and UI are evolving, feedback and contributions are welcome!
 
 ---
 
@@ -19,11 +19,6 @@ This project is in early development. Features and UI are evolving rapidly—fee
 ## 🤝 Contact
 Questions, ideas, or want to help? Reach out to the maintainer:
 - Email: `rogueworldsysop (at) gmail (dot) com`
-
----
-
-## 📋 About
-This toolkit brings fast, intuitive, and mobile-friendly tools to Alpha Strike Hex Play. Designed for clarity, speed, and fun at the table or on the go.
 
 ---
 

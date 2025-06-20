@@ -61,7 +61,11 @@
                   <td>Auto</td>
                 </tr>
                 <tr>
-                  <th>Manual Modifier</th>
+                  <th>Manual Mod +</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Manual Mod -</th>
                   <td>0</td>
                 </tr>
               </tbody>
@@ -197,20 +201,36 @@
               <a class="button is-rounded is-link is-small" onclick="updateRange(event, 5, 2);">Long</a>
             </div>
             <p class="title is-1"><!-- White space for adjustment.--></p>
-            <p class="subtitle is-6 has-text-white-ter">Manual Modifier</p>
-            <div class="buttons has-addons is-right" id="manualModifier">
+            <p class="subtitle is-6 has-text-white-ter">Manual Mod +</p>
+            <div class="buttons has-addons is-right" id="manualModPlus">
               <div class="field is-grouped">
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 0, -5);" modValue=-5>-5</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 1, -4);" modValue=-4>-4</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 2, -3);" modValue=-3>-3</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 3, -2);" modValue=-2>-2</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 4, -1);" modValue=-1>-1</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 5, 0);" modValue=0>0</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 6, 1);" modValue=1>+1</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 7, 2);" modValue=2>+2</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 8, 3);" modValue=3>+3</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 9, 4);" modValue=4>+4</a>
-                <a class="button is-rounded is-white is-small" onclick="updateManualModifier(event, 10, 5);" modValue=5>+5</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 0, 0);" modValue=0>+0</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 1, 1);" modValue=1>+1</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 2, 2);" modValue=2>+2</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 3, 3);" modValue=3>+3</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 4, 4);" modValue=4>+4</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 5, 5);" modValue=5>+5</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 6, 6);" modValue=6>+6</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 7, 7);" modValue=7>+7</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 8, 8);" modValue=8>+8</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 9, 9);" modValue=9>+9</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 10, 10);" modValue=10>+10</a>
+              </div>
+            </div>
+            <p class="subtitle is-6 has-text-white-ter">Manual Mod -</p>
+            <div class="buttons has-addons is-right" id="manualModMinus">
+              <div class="field is-grouped">
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 0, 0);" modValue=0>-0</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 1, -1);" modValue=-1>-1</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 2, -2);" modValue=-2>-2</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 3, -3);" modValue=-3>-3</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 4, -4);" modValue=-4>-4</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 5, -5);" modValue=-5>-5</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 6, -6);" modValue=-6>-6</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 7, -7);" modValue=-7>-7</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 8, -8);" modValue=-8>-8</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 9, -9);" modValue=-9>-9</a>
+                <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 10, -10);" modValue=-10>-10</a>
               </div>
             </div>
           </div>
@@ -267,10 +287,11 @@
   function sumModifierValue() {
     var elem = document.getElementById('viewTable');
     var sum = 0;
-    for (var i = 0; i < elem.rows.length - 2; i++) { // Exclude TN and Manual Modifier rows
+    for (var i = 0; i < elem.rows.length - 3; i++) { // Exclude TN and Manual Mod rows
       sum += Number(elem.rows[i].cells[1].firstChild.data);
     }
-    sum += Number(elem.rows[6].cells[1].firstChild.data); // Add Manual Modifier
+    sum += Number(elem.rows[6].cells[1].firstChild.data); // Manual Mod +
+    sum += Number(elem.rows[7].cells[1].firstChild.data); // Manual Mod -
     if (sum <= 2) {
       sum = "Auto"
     }
@@ -389,8 +410,8 @@
     sumModifierValue();
   }
 
-  function updateManualModifier(evt, index, value) {
-    var elem = document.getElementById('manualModifier');
+  function updateManualModPlus(evt, index, value) {
+    var elem = document.getElementById('manualModPlus');
     var buttons = elem.getElementsByClassName("button");
     var subtractValue = 0;
     var unselect = false;
@@ -410,6 +431,30 @@
     } else {
       buttons[index].className += " is-inverted";
       table.rows[6].cells[1].firstChild.data = Number(table.rows[6].cells[1].firstChild.data) - subtractValue + value;
+    }
+    sumModifierValue();
+  }
+  function updateManualModMinus(evt, index, value) {
+    var elem = document.getElementById('manualModMinus');
+    var buttons = elem.getElementsByClassName("button");
+    var subtractValue = 0;
+    var unselect = false;
+    var i = 0;
+    for (i = 0; i < buttons.length; i++) {
+      if (buttons[i].className.indexOf(" is-inverted") != -1) {
+        subtractValue = Number(buttons[i].attributes.modValue.value);
+        if (i == index) {
+          unselect = true;
+        }
+      }
+      buttons[i].className = buttons[i].className.replace(" is-inverted", "");
+    }
+    var table = document.getElementById("viewTable");
+    if (unselect) {
+      table.rows[7].cells[1].firstChild.data = Number(table.rows[7].cells[1].firstChild.data) - subtractValue;
+    } else {
+      buttons[index].className += " is-inverted";
+      table.rows[7].cells[1].firstChild.data = Number(table.rows[7].cells[1].firstChild.data) - subtractValue + value;
     }
     sumModifierValue();
   }

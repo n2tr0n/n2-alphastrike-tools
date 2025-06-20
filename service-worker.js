@@ -1,12 +1,13 @@
-// キャッシュしたいファイルの一覧を指定 ---
-const cacheFiles = ['index.html', 'bv-calculator.html', 'gator.html', 'HitLocationTable.html', 'logo.png'];
+// Specify the list of files to cache ---
+// const cacheFiles = ['index.html', 'bv-calculator.html', 'gator.html', 'HitLocationTable.html', 'logo.png'];
+const cacheFiles = ['index.html', 'gator.html', 'logo.png'];
 const cacheName = 'v0.0.15';
-// インストール時に実行されるイベント ---
+// Event executed on install ---
 self.addEventListener('install', event => {
-  // キャッシュしたいファイルを指定
+  // Specify the files to cache
   caches.open(cacheName).then(cache => cache.addAll(cacheFiles));
 });
-// インストール後に実行されるイベント
+// Event executed after installation ---
 function deleteOldCache() {
   caches.keys().then( (keyList) => 
     Promise.all(
@@ -21,12 +22,12 @@ function deleteOldCache() {
   )
 }
 self.addEventListener('activate', event => {
-  // 古いキャッシュの削除処理
+  // Delete old cache process
   event.waitUntil(deleteOldCache());
 });
-// fetchイベント
+// fetch event
 self.addEventListener('fetch', event => {
-  // キャッシュがあればそれを返す ---
+  // Return from cache if available ---
   event.respondWith(
     caches.match(event.request).then( (resp) => {
       return resp || fetch(event.request).then( (response) => {

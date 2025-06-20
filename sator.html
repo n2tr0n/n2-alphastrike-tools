@@ -271,11 +271,20 @@
   function sumModifierValue() {
     var elem = document.getElementById('viewTable');
     var sum = 0;
-    for (var i = 0; i < elem.rows.length - 3; i++) { // Exclude TN and Manual Mod rows
+    // Sum Skill, Attacker, Target, Other, Range
+    for (var i = 0; i <= 4; i++) {
       sum += Number(elem.rows[i].cells[1].firstChild.data);
     }
-    sum += Number(elem.rows[6].cells[1].firstChild.data); // Manual Mod +
-    sum += Number(elem.rows[7].cells[1].firstChild.data); // Manual Mod -
+    // Add Manual Mod + and Manual Mod - if present
+    if (elem.rows.length > 6) sum += Number(elem.rows[6].cells[1].firstChild.data);
+    if (elem.rows.length > 7) sum += Number(elem.rows[7].cells[1].firstChild.data);
+
+    // Write result to TN row (row 5 if no manual mods, row 8 if both present)
+    var tnRow = 5;
+    if (elem.rows.length > 8) tnRow = 8;
+    else if (elem.rows.length > 7) tnRow = 7;
+    else if (elem.rows.length > 6) tnRow = 6;
+
     if (sum <= 2) {
       sum = "Auto"
     }
@@ -285,7 +294,7 @@
     else {
       sum = sum + "+";
     }
-    setTableValue(event, 'viewTable', 5, 1, sum)
+    setTableValue(event, 'viewTable', tnRow, 1, sum)
   }
 
   function updateGunnery(evt, num) {

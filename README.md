@@ -4,7 +4,7 @@
 
 **Current Version:** `0.9.2b`
 
-A collection of tools for Battletech: Alpha Strike
+A collection of tools for Battletech: Alpha Strike 
 
 ---
 

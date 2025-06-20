@@ -296,7 +296,8 @@
 
   function updateAttacker(evt, num, value) {
     selectButton(event, 'Attacker', num);
-    setTableValue(event, 'viewTable', 1, 1, value)
+    var table = document.getElementById('viewTable');
+    table.rows[1].cells[1].firstChild.data = value;
     sumModifierValue();
   }
 

@@ -13,7 +13,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background-color: #181a1b !important; /* deep neutral dark, less harsh than pure black */
+      background-color: #2c2f34 !important; /* brighter neutral dark */
     }
 
     body {
@@ -27,7 +27,7 @@
     }
 
     footer.footer-fixed-bottom {
-      background-color: #181a1b !important;
+      background-color: #2c2f34 !important;
       color: #fff !important;
       flex-shrink: 0;
       width: 100%;
@@ -39,6 +39,17 @@
     footer.footer-fixed-bottom p,
     footer.footer-fixed-bottom .has-text-centered {
       color: #fff !important;
+    }
+    /* Make active black buttons more visible on dark bg */
+    .button.is-black.is-active, .button.is-black.is-inverted {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+    }
+    .button.is-black {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
     }
   </style>
 </head>

@@ -2,7 +2,7 @@
 
 > "Action served hot, at muzzle velocity!"
 
-**Current Version:** `0.9.2b`
+**Current Version:** `0.9.3b`
 
 A collection of tools for Battletech: Alpha Strike
 

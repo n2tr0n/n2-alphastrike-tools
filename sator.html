@@ -333,14 +333,14 @@
     else {
       var elem = document.getElementById('targetJump');
       var buttons = elem.getElementsByClassName("button");
-      elem = document.getElementById("viewTable");
+      var table = document.getElementById("viewTable");
       if (buttons[0].className.indexOf(" is-inverted") != -1) {
         buttons[0].className = buttons[0].className.replace(" is-inverted", "");
-        elem.rows[2].cells[1].firstChild.data = Number(elem.rows[2].cells[1].firstChild.data) - 1;
+        table.rows[2].cells[1].firstChild.data = Number(table.rows[2].cells[1].firstChild.data) - 1;
       }
       else {
         buttons[0].className += " is-inverted";
-        elem.rows[2].cells[1].firstChild.data = Number(elem.rows[2].cells[1].firstChild.data) + 1;
+        table.rows[2].cells[1].firstChild.data = Number(table.rows[2].cells[1].firstChild.data) + 1;
       }
     }
     sumModifierValue();

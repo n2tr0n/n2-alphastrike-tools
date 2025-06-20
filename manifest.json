@@ -1,0 +1,39 @@
+{
+  "name": "Battletech Tools",
+  "short_name": "BTtools",
+  "description": "Homebrew Battletech Tools.",
+  "version": "0.0.3",
+  "manifest_version": 3,
+  "homepage_url": "https://github.com/chinmi977/battletech_tools",
+  "icons": [
+    {
+      "src": "icons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/manifest-icon-192.maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/manifest-icon-512.maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/battletech_tools/index.html",
+  "id": "/battletech_tools/index.html",
+  "display": "standalone",
+  "theme_color": "#0000FF",
+  "background_color": "#FFFFFF"
+}

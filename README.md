@@ -1,22 +1,25 @@
 # n2-alphastrike-tools
 
-A fork of the excellent # battletech_tools by chinmi977, adapted for Alpha Strike Hex Play
+> "Action served hot, at muzzle velocity!"
 
-This project is in early development still
+A collection of tools for Battletech: Alpha Strike
 
-'Action served hot, at muzzle velocity!'
+---
 
-Current status: in a dev/alpha phase
+## 🚀 Project Status
+This project is in early development. Features and UI are evolving, feedback and contributions are welcome!
 
-Original Project URL: https://github.com/chinmi977/battletech_tools
+---
 
-Todo's
+## 🌐 Project Links
+- **Current Project:** [n2tr0n/n2-alphastrike-tools](https://github.com/n2tr0n/n2-alphastrike-tools)
 
-- Test current SATOR logic in a few games & seek community feedback
-- Replace original icons
-- Convert BV calculator to PV calculator
-- Convert HitLocationTable to CriticalHitLocation Tables 3x - mech/vehicle/aerospace
+---
 
-Project URL: https://github.com/n2tr0n/n2-alphastrike-tools
+## 🤝 Contact
+Questions, ideas, or want to help? Reach out to the maintainer:
+- Email: `rogueworldsysop (at) gmail (dot) com`
 
-Please reach out to the maintainer by email at rogueworldsysop (at) gmail (dot) com to discuss this project
+---
+
+<sub>Originally inspired by [battletech_tools by chinmi977](https://github.com/chinmi977/battletech_tools).</sub>

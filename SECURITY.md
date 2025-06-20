@@ -1,10 +1,16 @@
-# Security Policy
+# 🔒 Security Policy
 
-## Supported Versions
+## 🚫 Supported Versions
+This project is provided as-is, with **no official support or guarantees**. Use at your own risk—there are no warranties, and no versions are formally maintained.
 
-No versions of anything in this project are supported in any capacity. Use this repo at your own risk
+---
 
-## Reporting a Vulnerability
+## 🛡️ Reporting Vulnerabilities
+If you discover a security issue or have concerns, please contact the maintainer directly:
+- Email: `rogueworldsysop (at) gmail (dot) com`
 
-Please reach out to the maintainer by email at rogueworldsysop (at) gmail (dot) com to discuss
-any security concerns with this project
+Your responsible disclosure is appreciated and helps keep the community safe.
+
+---
+
+*Thank you for helping make open source better!*

@@ -54,11 +54,11 @@
           <div id="Attacker" class="content-tab" style="display:none">
             <p class="subtitle has-text-white-ter">Select Attacker movement.</p>
             <p>
-              <a class="button is-rounded is-primary is-small" onclick="updateAttacker(event, 0, 0);">Stationary</a>
-              <a class="button is-rounded is-white is-small" onclick="updateAttacker(event, 1, 1);">Walk</a>
-              <a class="button is-rounded is-black is-small" onclick="updateAttacker(event, 2, 2);">Run</a>
-              <a class="button is-rounded is-danger is-small" onclick="updateAttacker(event, 3, 3);">Jump</a>
-              <a class="button is-rounded is-warning is-small" onclick="updateAttacker(event, 4, 2);">Prone</a>
+              <a class="button is-rounded is-primary is-small" onclick="updateAttacker(event, 0, -1);">Stationary/Immobile</a>
+              <a class="button is-rounded is-white is-small" onclick="updateAttacker(event, 1, 0);">Ground Movement (walk/run)</a>
+              <a class="button is-rounded is-black is-small" onclick="updateAttacker(event, 2, 99);">Sprint</a>
+              <a class="button is-rounded is-danger is-small" onclick="updateAttacker(event, 3, 2);">Jump</a>
+              <!-- <a class="button is-rounded is-warning is-small" onclick="updateAttacker(event, 4, 2);">Prone</a> -->
             </p>
           </div>
           <div id="Target" class="content-tab" style="display:none">

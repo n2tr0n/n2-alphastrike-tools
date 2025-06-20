@@ -222,8 +222,21 @@
       </nav>
     </div>
   </section>
+  <footer class="hero-foot">
+    <div class="content has-text-centered">
+      <p id="appVersion"></p>
+    </div>
+  </footer>
 </body>
 <script>
+  const appVersion = '0.1.0b';
+  window.onload = function() {
+    var versionElem = document.getElementById('appVersion');
+    if (versionElem) {
+      versionElem.innerHTML = 'app version: ' + appVersion;
+    }
+  };
+
   function openTab(evt, tabName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("content-tab");

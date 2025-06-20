@@ -1,6 +1,5 @@
 // Specify the list of files to cache ---
-// const cacheFiles = ['index.html', 'bv-calculator.html', 'gator.html', 'HitLocationTable.html', 'logo.png'];
-const cacheFiles = ['index.html', 'gator.html', 'logo.png'];
+const cacheFiles = ['index.html', 'sator.html'];
 const cacheName = 'v0.0.15';
 // Event executed on install ---
 self.addEventListener('install', event => {

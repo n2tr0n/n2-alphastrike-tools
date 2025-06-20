@@ -53,17 +53,19 @@
     }
 
     @media (max-width: 900px) {
-      nav.level.is-mobile.is-flex-wrap-wrap {
+      #mainNav {
+        display: flex !important;
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 0.5rem !important;
       }
-      .level-left, .level-right {
+      #mainNav > .level-left, #mainNav > .level-right {
         min-width: 0 !important;
         width: 100% !important;
         flex: 1 1 100% !important;
+        display: block !important;
       }
-      .level-item {
+      #mainNav .level-item {
         width: 100% !important;
       }
     }
@@ -92,8 +94,8 @@
           </ul>
         </div>
       </div>
-      <nav class="level is-mobile is-flex-wrap-wrap" style="justify-content:center; align-items:flex-start; gap: 1.5rem; flex-wrap: wrap;">
-        <div class="level-left is-flex is-flex-direction-column-mobile" style="margin-right:0; min-width: 220px; flex: 1 1 300px;">
+      <nav class="level is-mobile" id="mainNav">
+        <div class="level-left" style="margin-right:0; min-width: 220px; flex: 1 1 300px;">
           <div class="level-item" style="margin-right:0; width:100%;">
             <table class="table is-fullwidth" id="viewTable" style="word-break:break-word;">
               <tbody>
@@ -125,7 +127,7 @@
             </table>
           </div>
         </div>
-        <div class="level-right is-flex is-flex-direction-column-mobile" style="margin-left:0; min-width: 220px; flex: 1 1 300px;">
+        <div class="level-right" style="margin-left:0; min-width: 220px; flex: 1 1 300px;">
           <div id="Gunnery" class="content-tab">
             <p class="subtitle has-text-white-ter">Select skill level.</p>
             <p>

@@ -2,7 +2,7 @@
   "name": "Alpha Strike Tools",
   "short_name": "AS-Tools",
   "description": "Alpha Strike Tools.",
-  "version": "0.0.1a",
+  "version": "0.1.0b",
   "manifest_version": 3,
   "homepage_url": "https://n2tr0n.github.io/n2-alphastrike-tools/",
   "icons": [

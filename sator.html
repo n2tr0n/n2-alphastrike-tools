@@ -639,39 +639,22 @@
 
   var prevSelectRangeAttribute;
   function updateRange(evt, num, value, selectAttribute) {
-    // Fill in all buttons up to and including selected, like Skill/TMM/Heat
-    var rangeGroups = [
-      ['Range', 0, 3], // Classic: Short, Medium, Long
-      ['Range', 3, 6]  // EasyShot: Short, Medium, Long
-    ];
-    var found = false;
-    for (var g = 0; g < rangeGroups.length; g++) {
-      var group = rangeGroups[g];
-      var elem = document.getElementById(group[0]);
+    // Fill in all buttons up to and including selected index with black, rest white
+    var elem = document.getElementById('Range');
+    if (elem) {
       var buttons = elem.getElementsByClassName('button');
-      if (num >= group[1] && num < group[2]) {
-        for (var i = group[1]; i < group[2]; i++) {
-          buttons[i].className = buttons[i].className.replace(' is-black', '');
-          buttons[i].className = buttons[i].className.replace(' is-white', '');
-          buttons[i].className = buttons[i].className.replace(' is-active', '');
-          if (i <= num) {
-            buttons[i].className += ' is-black is-active';
-          } else {
-            buttons[i].className += ' is-white';
-          }
-        }
-        found = true;
-      } else {
-        // Unselect other group
-        for (var i = group[1]; i < group[2]; i++) {
-          buttons[i].className = buttons[i].className.replace(' is-black', '');
-          buttons[i].className = buttons[i].className.replace(' is-white', '');
-          buttons[i].className = buttons[i].className.replace(' is-active', '');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-black', '');
+        buttons[i].className = buttons[i].className.replace(' is-white', '');
+        buttons[i].className = buttons[i].className.replace(' is-active', '');
+        if (i <= num) {
+          buttons[i].className += ' is-black is-active';
+        } else {
           buttons[i].className += ' is-white';
         }
       }
     }
-    setTableValue(event, 'viewTable', 4, 1, value);
+    setTableValue(event, 'viewTable', 4, 1, value)
     sumModifierValue();
   }
 
@@ -688,14 +671,9 @@
         buttons[i].className += ' is-white';
       }
     }
-    if (index === 0 && value === 0 && buttons[0].className.indexOf(' is-black') === -1) {
-      manualModPlus = 0;
-    } else {
-      manualModPlus = value;
-    }
+    manualModPlus = value;
     sumModifierValue();
   }
-
   function updateManualModMinus(evt, index, value) {
     var elem = document.getElementById('manualModMinus');
     var buttons = elem.getElementsByClassName('button');
@@ -709,11 +687,7 @@
         buttons[i].className += ' is-white';
       }
     }
-    if (index === 0 && value === 0 && buttons[0].className.indexOf(' is-black') === -1) {
-      manualModMinus = 0;
-    } else {
-      manualModMinus = value;
-    }
+    manualModMinus = value;
     sumModifierValue();
   }
 

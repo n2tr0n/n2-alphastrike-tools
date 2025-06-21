@@ -180,6 +180,28 @@
         width: 100% !important;
       }
     }
+
+    .sator-reset-btn {
+      background: linear-gradient(90deg, #e0e0e0 0%, #bfc9d1 100%);
+      color: #23272a;
+      font-weight: 700;
+      border: 2.5px solid #fff;
+      border-radius: 2em;
+      box-shadow: 0 3px 16px 0 rgba(180,180,180,0.22), 0 1.5px 0 #bfc9d1 inset;
+      padding: 0.5em 1.8em;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, transform 0.12s;
+      letter-spacing: 0.04em;
+      font-size: 1.15em;
+      outline: none;
+      position: relative;
+    }
+    .sator-reset-btn:active, .sator-reset-btn.is-active {
+      background: linear-gradient(90deg, #bfc9d1 0%, #e0e0e0 100%);
+      color: #23272a;
+      border: 2.5px solid #23272a;
+      box-shadow: 0 1.5px 6px 0 rgba(80,80,80,0.13), 0 0.5px 0 #fff inset;
+      transform: translateY(2px) scale(0.98);
+    }
   </style>
 </head>
 
@@ -389,19 +411,14 @@
           </div>
         </div>
       </nav>
-      <!-- Reset Button -->
-      <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.5rem;">
-        <button id="resetSatorBtn" class="button is-large" style="background:linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);color:#23272a;font-weight:700;border:2.5px solid #fff;border-radius:2em;box-shadow:0 2px 12px 0 rgba(180,180,180,0.18);padding:0.7em 2.5em;transition:box-shadow 0.2s,background 0.2s;letter-spacing:0.04em;" onclick="resetSator();">
+      <!-- Reset Button (single, above footer) -->
+      <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.2rem;">
+        <button id="resetSatorBtn" class="button is-medium sator-reset-btn" onclick="resetSator();">
           Reset
         </button>
       </div>
     </div>
   </section>
-  <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.5rem;">
-    <button id="resetSatorBtn" class="button is-large" style="background:linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);color:#23272a;font-weight:700;border:2.5px solid #fff;border-radius:2em;box-shadow:0 2px 12px 0 rgba(180,180,180,0.18);padding:0.7em 2.5em;transition:box-shadow 0.2s,background 0.2s;letter-spacing:0.04em;" onclick="resetSator();">
-      Reset
-    </button>
-  </div>
   <footer class="footer-fixed-bottom">
     <div class="content has-text-centered">
       <p>
@@ -870,6 +887,25 @@
     var contentTabs = document.getElementsByClassName('content-tab');
     for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
     document.getElementById(tabNames[activeTabIdx]).style.display = 'block';
+  }
+  // Add visual feedback for button press
+  var resetBtn = document.getElementById('resetSatorBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('mousedown', function() {
+      resetBtn.classList.add('is-active');
+    });
+    resetBtn.addEventListener('mouseup', function() {
+      resetBtn.classList.remove('is-active');
+    });
+    resetBtn.addEventListener('mouseleave', function() {
+      resetBtn.classList.remove('is-active');
+    });
+    resetBtn.addEventListener('touchstart', function() {
+      resetBtn.classList.add('is-active');
+    });
+    resetBtn.addEventListener('touchend', function() {
+      resetBtn.classList.remove('is-active');
+    });
   }
 </script>
 

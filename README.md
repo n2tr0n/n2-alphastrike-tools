@@ -18,7 +18,7 @@ This project is in early development. Features and UI are evolving, feedback and
 
 ---
 
-## 🖥️ UI Links
+## 🖥️ Github Pages Main UI Links
 - **Main UI:** [https://n2tr0n.github.io/n2-alphastrike-tools/index.html](https://n2tr0n.github.io/n2-alphastrike-tools/index.html)
   - **S.A.T.O.R. Calculator:** [https://n2tr0n.github.io/n2-alphastrike-tools/sator.html](https://n2tr0n.github.io/n2-alphastrike-tools/sator.html)
 

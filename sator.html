@@ -841,12 +841,11 @@
     table.rows[5].cells[1].firstChild.data = 'Auto'; // TN
     // Reset Skill bar
     selectUntilNumberButton(null, 'Gunnery', 0);
-    // Reset Attacker
+    // Reset Attacker: remove is-inverted from all, do NOT select any
     var attackerBtns = document.getElementById('Attacker').getElementsByClassName('button');
     for (var i = 0; i < attackerBtns.length; i++) {
       attackerBtns[i].className = attackerBtns[i].className.replace(' is-inverted', '');
     }
-    selectButton({currentTarget:attackerBtns[0]}, 'Attacker', 0);
     // Reset Target bar
     selectUntilNumberButton(null, 'targetBasic', 0);
     // Reset Target Jump/Advanced

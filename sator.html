@@ -389,8 +389,19 @@
           </div>
         </div>
       </nav>
+      <!-- Reset Button -->
+      <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.5rem;">
+        <button id="resetSatorBtn" class="button is-large" style="background:linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);color:#23272a;font-weight:700;border:2.5px solid #fff;border-radius:2em;box-shadow:0 2px 12px 0 rgba(180,180,180,0.18);padding:0.7em 2.5em;transition:box-shadow 0.2s,background 0.2s;letter-spacing:0.04em;" onclick="resetSator();">
+          Reset
+        </button>
+      </div>
     </div>
   </section>
+  <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.5rem;">
+    <button id="resetSatorBtn" class="button is-large" style="background:linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);color:#23272a;font-weight:700;border:2.5px solid #fff;border-radius:2em;box-shadow:0 2px 12px 0 rgba(180,180,180,0.18);padding:0.7em 2.5em;transition:box-shadow 0.2s,background 0.2s;letter-spacing:0.04em;" onclick="resetSator();">
+      Reset
+    </button>
+  </div>
   <footer class="footer-fixed-bottom">
     <div class="content has-text-centered">
       <p>
@@ -786,6 +797,79 @@
     // Store the value for heat (should be the selected value, not cumulative)
     otherHeat = value;
     updateOtherSum();
+  }
+
+  // --- RESET FUNCTIONALITY ---
+  document.getElementById('resetSatorBtn').onclick = resetSator;
+  function resetSator() {
+    // Save current tab
+    var tabEls = document.getElementsByClassName('tab');
+    var activeTabIdx = 0;
+    for (var i = 0; i < tabEls.length; i++) {
+      if (tabEls[i].className.indexOf('is-active') !== -1) {
+        activeTabIdx = i;
+        break;
+      }
+    }
+    // Reset all table values
+    var table = document.getElementById('viewTable');
+    table.rows[0].cells[1].firstChild.data = 0; // Skill
+    table.rows[1].cells[1].firstChild.data = 0; // Attacker
+    table.rows[2].cells[1].firstChild.data = 0; // Target
+    table.rows[3].cells[1].firstChild.data = 0; // Other
+    table.rows[4].cells[1].firstChild.data = 0; // Range
+    table.rows[5].cells[1].firstChild.data = 'Auto'; // TN
+    // Reset Skill bar
+    selectUntilNumberButton(null, 'Gunnery', 0);
+    // Reset Attacker
+    var attackerBtns = document.getElementById('Attacker').getElementsByClassName('button');
+    for (var i = 0; i < attackerBtns.length; i++) {
+      attackerBtns[i].className = attackerBtns[i].className.replace(' is-inverted', '');
+    }
+    selectButton({currentTarget:attackerBtns[0]}, 'Attacker', 0);
+    // Reset Target bar
+    selectUntilNumberButton(null, 'targetBasic', 0);
+    // Reset Target Jump/Advanced
+    var jumpBtn = document.getElementById('targetJump').getElementsByClassName('button')[0];
+    jumpBtn.className = jumpBtn.className.replace(' is-inverted', '');
+    var advBtns = document.getElementById('targetAdvanced').getElementsByClassName('button');
+    for (var i = 0; i < advBtns.length; i++) advBtns[i].className = advBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: woodsBetween
+    var woodsBetweenBtns = document.getElementById('woodsBetween').getElementsByClassName('button');
+    for (var i = 0; i < woodsBetweenBtns.length; i++) woodsBetweenBtns[i].className = woodsBetweenBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: woodsAmong
+    var woodsAmongBtns = document.getElementById('woodsAmong').getElementsByClassName('button');
+    for (var i = 0; i < woodsAmongBtns.length; i++) woodsAmongBtns[i].className = woodsAmongBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: otherTerrain
+    var otherTerrainBtns = document.getElementById('otherTerrain').getElementsByClassName('button');
+    for (var i = 0; i < otherTerrainBtns.length; i++) otherTerrainBtns[i].className = otherTerrainBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: otherHeat
+    selectUntilNumberButton(null, 'otherHeat', 0);
+    // Reset Range (both rows)
+    var rangeBtns = document.getElementById('Range').getElementsByClassName('button');
+    for (var i = 0; i < rangeBtns.length; i++) rangeBtns[i].className = rangeBtns[i].className.replace(' is-inverted', '');
+    // Reset Manual Mod+
+    selectUntilNumberButton(null, 'manualModPlus', 0);
+    manualModPlus = 0;
+    // Reset Manual Mod-
+    selectUntilNumberButton(null, 'manualModMinus', 0);
+    manualModMinus = 0;
+    // Reset Other state vars
+    otherWoodsBetween = 0;
+    otherWoodsAmong = 0;
+    otherTerrain = 0;
+    otherHeat = 0;
+    // Recompute TN
+    sumModifierValue();
+    // Restore tab
+    for (var i = 0; i < tabEls.length; i++) {
+      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
+    }
+    tabEls[activeTabIdx].className += ' is-active';
+    var tabNames = ['Gunnery','Attacker','Target','Other','Range'];
+    var contentTabs = document.getElementsByClassName('content-tab');
+    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
+    document.getElementById(tabNames[activeTabIdx]).style.display = 'block';
   }
 </script>
 

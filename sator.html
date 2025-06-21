@@ -431,12 +431,15 @@
   </footer>
 </body>
 <script>
-  const appVersion = '0.9.3b';
   window.onload = function() {
-    var versionElem = document.getElementById('appVersion');
-    if (versionElem) {
-      versionElem.innerHTML = 'app version: ' + appVersion;
-    }
+    fetch('version.json')
+      .then(response => response.json())
+      .then(data => {
+        var versionElem = document.getElementById('appVersion');
+        if (versionElem) {
+          versionElem.innerHTML = 'app version: ' + data.version;
+        }
+      });
   };
 
   function openTab(evt, tabName) {

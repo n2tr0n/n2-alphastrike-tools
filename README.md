@@ -2,7 +2,7 @@
 
 > "Action served hot, at muzzle velocity!"
 
-**Current Version:** `0.9.3b`
+**Current Version:** See [`version.json`](./version.json)
 
 A collection of homebrew tools for Battletech: Alpha Strike
 

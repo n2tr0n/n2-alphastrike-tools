@@ -48,36 +48,59 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
-    /* Attacker movement: traffic-light colors for active/inverted styles */
-    .button.is-primary {
+    /* Attacker movement: custom vivid colors for default and inverted states */
+    #Attacker .button {
       background-color: #fff !important;
-      color: #00e676 !important; /* vivid green */
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+      transition: background 0.15s, color 0.15s, border 0.15s;
+    }
+    #Attacker .button.attacker-stationary {
+      background-color: #00e676 !important; /* vivid green */
+      color: #fff !important;
       border: 1.5px solid #00e676 !important;
     }
-    .button.is-primary.is-active, .button.is-primary.is-inverted {
+    #Attacker .button.attacker-jump {
+      background-color: #ff1744 !important; /* vivid red */
+      color: #fff !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    #Attacker .button.is-inverted.attacker-stationary {
       background-color: #23272a !important;
       color: #00e676 !important;
       border: 1.5px solid #00e676 !important;
     }
-    .button.is-danger {
-      background-color: #fff !important;
-      color: #ff1744 !important; /* vivid red */
-      border: 1.5px solid #ff1744 !important;
-    }
-    .button.is-danger.is-active, .button.is-danger.is-inverted {
+    #Attacker .button.is-inverted.attacker-jump {
       background-color: #23272a !important;
       color: #ff1744 !important;
       border: 1.5px solid #ff1744 !important;
     }
-    .button.is-white {
-      background-color: #fff !important;
-      color: #23272a !important;
-      border: 1.5px solid #23272a !important;
-    }
-    .button.is-white.is-active, .button.is-white.is-inverted {
+    #Attacker .button.is-inverted {
       background-color: #23272a !important;
       color: #fff !important;
       border: 1.5px solid #fff !important;
+    }
+    /* ====== Reset Button: Silvery, 3D, and Interactive ====== */
+    .sator-reset-btn {
+      background: linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);
+      color: #23272a;
+      font-weight: 700;
+      border: 2.5px solid #fff;
+      border-radius: 2em;
+      box-shadow: 0 3px 16px 0 rgba(180,180,180,0.22), 0 1.5px 0 #bfc9d1 inset;
+      padding: 0.5em 1.8em;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, transform 0.12s;
+      letter-spacing: 0.04em;
+      font-size: 1.15em;
+      outline: none;
+      position: relative;
+    }
+    .sator-reset-btn:active, .sator-reset-btn.is-active {
+      background: linear-gradient(90deg, #bfc9d1 0%, #e0e0e0 100%);
+      color: #23272a;
+      border: 2.5px solid #23272a;
+      box-shadow: 0 1.5px 6px 0 rgba(80,80,80,0.13), 0 0.5px 0 #fff inset;
+      transform: translateY(2px) scale(0.98);
     }
     /* Range buttons: restore vivid backgrounds for Medium and Long, keep inverted state as before, and fix border alignment */
     #Range .button.is-success {

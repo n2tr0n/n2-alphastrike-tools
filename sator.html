@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</title>
+  <title>Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <style>
@@ -41,15 +41,126 @@
       color: #fff !important;
     }
     /* Make active black buttons more visible on dark bg */
-    .button.is-black.is-active, .button.is-black.is-inverted {
+    .button.is-black, .button.is-black.is-active, .button.is-black.is-inverted {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
+    /* Attacker movement: traffic-light colors for active/inverted styles */
+    .button.is-primary {
+      background-color: #fff !important;
+      color: #00e676 !important; /* vivid green */
+      border: 1.5px solid #00e676 !important;
+    }
+    .button.is-primary.is-active, .button.is-primary.is-inverted {
+      background-color: #23272a !important;
+      color: #00e676 !important;
+      border: 1.5px solid #00e676 !important;
+    }
+    .button.is-danger {
+      background-color: #fff !important;
+      color: #ff1744 !important; /* vivid red */
+      border: 1.5px solid #ff1744 !important;
+    }
+    .button.is-danger.is-active, .button.is-danger.is-inverted {
+      background-color: #23272a !important;
+      color: #ff1744 !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    .button.is-white {
       background-color: #fff !important;
       color: #23272a !important;
       border: 1.5px solid #23272a !important;
     }
-    .button.is-black {
+    .button.is-white.is-active, .button.is-white.is-inverted {
       background-color: #23272a !important;
       color: #fff !important;
       border: 1.5px solid #fff !important;
+    }
+    /* Range buttons: restore vivid backgrounds for Medium and Long, keep inverted state as before, and fix border alignment */
+    #Range .button.is-success {
+      background-color: #00c853 !important; /* vivid green */
+      color: #fff !important;
+      border: 1.5px solid #00c853 !important;
+      box-shadow: none !important;
+    }
+    #Range .button.is-success.is-inverted {
+      background-color: #23272a !important;
+      color: #00c853 !important;
+      border: 1.5px solid #00c853 !important;
+      box-shadow: none !important;
+    }
+    #Range .button.is-link {
+      background-color: #1976d2 !important; /* vivid blue */
+      color: #fff !important;
+      border: 1.5px solid #1976d2 !important;
+      box-shadow: none !important;
+    }
+    #Range .button.is-link.is-inverted {
+      background-color: #23272a !important;
+      color: #1976d2 !important;
+      border: 1.5px solid #1976d2 !important;
+      box-shadow: none !important;
+    }
+    /* Range buttons: make unactuated 'short' button border same color as button (white) for uniformity */
+    #Range .button.is-white {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #fff !important;
+      box-shadow: none !important;
+    }
+    #Range .button.is-white.is-inverted {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+      box-shadow: none !important;
+    }
+    #Range .button {
+      margin: 0 !important;
+      box-shadow: none !important;
+    }
+
+    /* Manual Mod+ and Mod-: match Skill/TMM/Heat bar behavior */
+    #manualModPlus .button.is-white, #manualModMinus .button.is-white {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+    }
+    #manualModPlus .button.is-black, #manualModPlus .button.is-black.is-active,
+    #manualModMinus .button.is-black, #manualModMinus .button.is-black.is-active {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
+
+    /* Make left table wider and prevent label wrapping */
+    #viewTable {
+      background: #181a1b !important;
+      border-radius: 10px;
+      min-width: 220px;
+      max-width: 320px;
+      width: 100%;
+      font-size: 1.02rem;
+      color: #fff;
+      margin: 0 auto;
+      border-collapse: separate !important;
+      border-spacing: 0;
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,0.13);
+    }
+    #viewTable th, #viewTable td {
+      border-bottom: 1px solid #23272a !important;
+      padding: 0.35em 0.5em !important;
+      text-align: left;
+      background: transparent !important;
+      white-space: nowrap !important;
+    }
+    #viewTable th {
+      color: #bfc9d1 !important;
+      font-weight: 600;
+      width: 60%;
+    }
+    #viewTable tr:last-child th, #viewTable tr:last-child td {
+      border-bottom: none !important;
     }
 
     @media (max-width: 900px) {
@@ -69,13 +180,35 @@
         width: 100% !important;
       }
     }
+
+    .sator-reset-btn {
+      background: linear-gradient(90deg, #e0e0e0 0%, #bfc9d1 100%);
+      color: #23272a;
+      font-weight: 700;
+      border: 2.5px solid #fff;
+      border-radius: 2em;
+      box-shadow: 0 3px 16px 0 rgba(180,180,180,0.22), 0 1.5px 0 #bfc9d1 inset;
+      padding: 0.5em 1.8em;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, transform 0.12s;
+      letter-spacing: 0.04em;
+      font-size: 1.15em;
+      outline: none;
+      position: relative;
+    }
+    .sator-reset-btn:active, .sator-reset-btn.is-active {
+      background: linear-gradient(90deg, #bfc9d1 0%, #e0e0e0 100%);
+      color: #23272a;
+      border: 2.5px solid #23272a;
+      box-shadow: 0 1.5px 6px 0 rgba(80,80,80,0.13), 0 0.5px 0 #fff inset;
+      transform: translateY(2px) scale(0.98);
+    }
   </style>
 </head>
 
 <body>
   <section class="hero">
     <h1 class="subtitle has-text-white-ter has-text-centered">
-      Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)
+      Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)
     </h1>
     <div class="container has-text-centered is-fluid is-marginless">
       <div class="tabs is-boxed is-fullwidth">
@@ -131,12 +264,12 @@
           <div id="Gunnery" class="content-tab">
             <p class="subtitle has-text-white-ter">Select skill level.</p>
             <p>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 1);">1</a>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 2);">2</a>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 3);">3</a>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 4);">4</a>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 5);">5</a>
-              <a class="button is-rounded is-small" onclick="updateGunnery(event, 6);">6</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 1);">1</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 2);">2</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 3);">3</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 4);">4</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 5);">5</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 6);">6</a>
             </p>
           </div>
           <div id="Attacker" class="content-tab" style="display:none">
@@ -153,13 +286,13 @@
             <p class="subtitle has-text-white-ter">Select TMM</p>
             <p>
             <div class="buttons has-addons is-right" id="targetBasic">
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 0);">0</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 1);">1</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 2);">2</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 3);">3</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 4);">4</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 5);">5</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 6);">6</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 0);">0</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 1);">1</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 2);">2</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 3);">3</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 4);">4</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 5);">5</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 6);">6</a>
             </div>
             <div class="buttons has-addons is-right" id="targetJump">
               <a class="button is-rounded is-white is-small" onclick="updateTargetJump(event);">Jump</a>
@@ -227,16 +360,11 @@
                 <p class="has-text-white-ter">Attacker Heat</p>
                 <div class="buttons has-addons" id="otherHeat">
                   <div class="field is-grouped">
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 0, 0);"
-                      modValue=0>0</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 1, 1);"
-                      modValue=1>1</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 2, 2);"
-                      modValue=2>2</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 3, 3);"
-                      modValue=3>3</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 4, 4);"
-                      modValue=4>4</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 0, 0);" modValue=0>0</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 1, 1);" modValue=1>1</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 2, 2);" modValue=2>2</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 3, 3);" modValue=3>3</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 4, 4);" modValue=4>4</a>
                   </div>
                 </div>
               </div>
@@ -283,21 +411,35 @@
           </div>
         </div>
       </nav>
+      <!-- Reset Button (single, above footer) -->
+      <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.2rem;">
+        <button id="resetSatorBtn" class="button is-medium sator-reset-btn" onclick="resetSator();">
+          Reset
+        </button>
+      </div>
     </div>
   </section>
   <footer class="footer-fixed-bottom">
     <div class="content has-text-centered">
+      <p>
+        Project homepage: <a href="https://github.com/n2tr0n/n2-alphastrike-tools" target="_blank" rel="noopener noreferrer" style="color:#bfc9d1; font-weight:600; font-size:1.08em; text-decoration:underline;">
+          https://github.com/n2tr0n/n2-alphastrike-tools
+        </a>
+      </p>
       <p id="appVersion"></p>
     </div>
   </footer>
 </body>
 <script>
-  const appVersion = '0.9.3b';
   window.onload = function() {
-    var versionElem = document.getElementById('appVersion');
-    if (versionElem) {
-      versionElem.innerHTML = 'app version: ' + appVersion;
-    }
+    fetch('version.json')
+      .then(response => response.json())
+      .then(data => {
+        var versionElem = document.getElementById('appVersion');
+        if (versionElem) {
+          versionElem.innerHTML = 'app version: ' + data.version;
+        }
+      });
   };
 
   function openTab(evt, tabName) {
@@ -317,13 +459,15 @@
   function selectUntilNumberButton(evt, id, num) {
     var elem = document.getElementById(id);
     var buttons = elem.getElementsByClassName("button");
-    for (i = 0; i < buttons.length; i++) {
-      buttons[i].className = buttons[i].className.replace(" is-active", "");
+    for (var i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(" is-black", "");
-    }
-    for (i = 0; i < num; i++) {
-      buttons[i].className += " is-black";
-      buttons[i].className += " is-active";
+      buttons[i].className = buttons[i].className.replace(" is-white", "");
+      buttons[i].className = buttons[i].className.replace(" is-active", "");
+      if (i < num) {
+        buttons[i].className += " is-black is-active";
+      } else {
+        buttons[i].className += " is-white";
+      }
     }
   }
 
@@ -402,6 +546,35 @@
     setTableValue(event, 'viewTable', 2, 1, num)
     sumModifierValue();
   }
+  function updateTargetBar(evt, num) {
+    var elem = document.getElementById('targetBasic');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= num) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    //If advanced is on, turn off advanced.
+    var advElem = document.getElementById('targetAdvanced');
+    var advButtons = advElem.getElementsByClassName('button');
+    for (i = 0; i < advButtons.length; i++) {
+      advButtons[i].className = advButtons[i].className.replace(' is-inverted', '');
+    }
+    //If jump is on, add +1.
+    var jumpElem = document.getElementById('targetJump');
+    var jumpButtons = jumpElem.getElementsByClassName('button');
+    var tmm = num;
+    if (jumpButtons[0].className.indexOf(' is-inverted') != -1) {
+      tmm = tmm + 1;
+    }
+    setTableValue(event, 'viewTable', 2, 1, tmm);
+    sumModifierValue();
+  }
   function updateTargetJump(evt) {
     //Do not turn on, when advanced is on.
     var elem = document.getElementById('targetAdvanced');
@@ -444,7 +617,91 @@
     sumModifierValue();
   }
 
+  // Track each 'Other' group value separately
+  var otherWoodsBetween = 0;
+  var otherWoodsAmong = 0;
+  var otherTerrain = 0;
+  var otherHeat = 0;
+
   function updateOther(evt, targetId, index, value) {
+    // Special case: if targetId is 'otherHeat', use fill-in behavior like Skill/TMM
+    if (targetId === 'otherHeat') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-black', '');
+        buttons[i].className = buttons[i].className.replace(' is-white', '');
+        buttons[i].className = buttons[i].className.replace(' is-active', '');
+        if (i <= index) {
+          buttons[i].className += ' is-black is-active';
+        } else {
+          buttons[i].className += ' is-white';
+        }
+      }
+      // Store the value for heat (should be the selected value, not cumulative)
+      otherHeat = value;
+      updateOtherSum();
+      return;
+    }
+    // woodsBetween: allow both buttons to be toggled independently
+    if (targetId === 'woodsBetween') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      // Toggle the clicked button
+      if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+        buttons[index].className = buttons[index].className.replace(' is-inverted', '');
+      } else {
+        buttons[index].className += ' is-inverted';
+      }
+      // Sum all selected modifiers for woodsBetween
+      var total = 0;
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].className.indexOf(' is-inverted') !== -1) {
+          total += Number(buttons[i].attributes.modValue.value);
+        }
+      }
+      otherWoodsBetween = total;
+      updateOtherSum();
+      return;
+    }
+    // woodsAmong: single-select, value is 0 if none selected
+    if (targetId === 'woodsAmong') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      var wasSelected = (buttons[index].className.indexOf(' is-inverted') !== -1);
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+      }
+      if (!wasSelected) {
+        buttons[index].className += ' is-inverted';
+        otherWoodsAmong = value;
+      } else {
+        otherWoodsAmong = 0;
+      }
+      updateOtherSum();
+      return;
+    }
+    // otherTerrain: allow both buttons to be toggled independently
+    if (targetId === 'otherTerrain') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      // Toggle the clicked button
+      if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+        buttons[index].className = buttons[index].className.replace(' is-inverted', '');
+      } else {
+        buttons[index].className += ' is-inverted';
+      }
+      // Sum all selected modifiers for otherTerrain
+      var total = 0;
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].className.indexOf(' is-inverted') !== -1) {
+          total += Number(buttons[i].attributes.modValue.value);
+        }
+      }
+      otherTerrain = total;
+      updateOtherSum();
+      return;
+    }
     //Get selected button index, and modValue.
     var elem = document.getElementById(targetId);
     var buttons = elem.getElementsByClassName("button");
@@ -472,56 +729,186 @@
     sumModifierValue();
   }
 
+  function updateOtherSum() {
+    var table = document.getElementById('viewTable');
+    table.rows[3].cells[1].firstChild.data = otherWoodsBetween + otherWoodsAmong + otherTerrain + otherHeat;
+    sumModifierValue();
+  }
+
   var prevSelectRangeAttribute;
   function updateRange(evt, num, value, selectAttribute) {
-    prevSelectRangeAttribute = selectButton(event, 'Range', num, prevSelectRangeAttribute, selectAttribute);
+    // There are two rows of range buttons: Classic (0-2) and EasyShot (3-5)
+    var elem = document.getElementById('Range');
+    if (elem) {
+      var buttons = elem.getElementsByClassName('button');
+      // Classic: 0-2, EasyShot: 3-5
+      if (num <= 2) {
+        // Un-invert EasyShot row
+        for (var i = 3; i <= 5; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        // Only invert the selected Classic button
+        for (var i = 0; i <= 2; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        buttons[num].className += ' is-inverted';
+      } else {
+        // Un-invert Classic row
+        for (var i = 0; i <= 2; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        // Only invert the selected EasyShot button
+        for (var i = 3; i <= 5; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        buttons[num].className += ' is-inverted';
+      }
+    }
     setTableValue(event, 'viewTable', 4, 1, value)
     sumModifierValue();
   }
 
   function updateManualModPlus(evt, index, value) {
     var elem = document.getElementById('manualModPlus');
-    var buttons = elem.getElementsByClassName("button");
-    var subtractValue = 0;
-    var unselect = false;
+    var buttons = elem.getElementsByClassName('button');
     for (var i = 0; i < buttons.length; i++) {
-      if (buttons[i].className.indexOf(" is-inverted") != -1) {
-        subtractValue = Number(buttons[i].attributes.modValue.value);
-        if (i == index) {
-          unselect = true;
-        }
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
       }
-      buttons[i].className = buttons[i].className.replace(" is-inverted", "");
     }
-    if (unselect) {
-      manualModPlus = 0;
-    } else {
-      buttons[index].className += " is-inverted";
-      manualModPlus = value;
-    }
+    manualModPlus = value;
     sumModifierValue();
   }
   function updateManualModMinus(evt, index, value) {
     var elem = document.getElementById('manualModMinus');
-    var buttons = elem.getElementsByClassName("button");
-    var subtractValue = 0;
-    var unselect = false;
+    var buttons = elem.getElementsByClassName('button');
     for (var i = 0; i < buttons.length; i++) {
-      if (buttons[i].className.indexOf(" is-inverted") != -1) {
-        subtractValue = Number(buttons[i].attributes.modValue.value);
-        if (i == index) {
-          unselect = true;
-        }
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
       }
-      buttons[i].className = buttons[i].className.replace(" is-inverted", "");
     }
-    if (unselect) {
-      manualModMinus = 0;
-    } else {
-      buttons[index].className += " is-inverted";
-      manualModMinus = value;
-    }
+    manualModMinus = value;
     sumModifierValue();
+  }
+
+  function updateOtherHeatBar(evt, index, value) {
+    var elem = document.getElementById('otherHeat');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    // Store the value for heat (should be the selected value, not cumulative)
+    otherHeat = value;
+    updateOtherSum();
+  }
+
+  // --- RESET FUNCTIONALITY ---
+  document.getElementById('resetSatorBtn').onclick = resetSator;
+  function resetSator() {
+    // Save current tab
+    var tabEls = document.getElementsByClassName('tab');
+    var activeTabIdx = 0;
+    for (var i = 0; i < tabEls.length; i++) {
+      if (tabEls[i].className.indexOf('is-active') !== -1) {
+        activeTabIdx = i;
+        break;
+      }
+    }
+    // Reset all table values
+    var table = document.getElementById('viewTable');
+    table.rows[0].cells[1].firstChild.data = 0; // Skill
+    table.rows[1].cells[1].firstChild.data = 0; // Attacker
+    table.rows[2].cells[1].firstChild.data = 0; // Target
+    table.rows[3].cells[1].firstChild.data = 0; // Other
+    table.rows[4].cells[1].firstChild.data = 0; // Range
+    table.rows[5].cells[1].firstChild.data = 'Auto'; // TN
+    // Reset Skill bar
+    selectUntilNumberButton(null, 'Gunnery', 0);
+    // Reset Attacker
+    var attackerBtns = document.getElementById('Attacker').getElementsByClassName('button');
+    for (var i = 0; i < attackerBtns.length; i++) {
+      attackerBtns[i].className = attackerBtns[i].className.replace(' is-inverted', '');
+    }
+    selectButton({currentTarget:attackerBtns[0]}, 'Attacker', 0);
+    // Reset Target bar
+    selectUntilNumberButton(null, 'targetBasic', 0);
+    // Reset Target Jump/Advanced
+    var jumpBtn = document.getElementById('targetJump').getElementsByClassName('button')[0];
+    jumpBtn.className = jumpBtn.className.replace(' is-inverted', '');
+    var advBtns = document.getElementById('targetAdvanced').getElementsByClassName('button');
+    for (var i = 0; i < advBtns.length; i++) advBtns[i].className = advBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: woodsBetween
+    var woodsBetweenBtns = document.getElementById('woodsBetween').getElementsByClassName('button');
+    for (var i = 0; i < woodsBetweenBtns.length; i++) woodsBetweenBtns[i].className = woodsBetweenBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: woodsAmong
+    var woodsAmongBtns = document.getElementById('woodsAmong').getElementsByClassName('button');
+    for (var i = 0; i < woodsAmongBtns.length; i++) woodsAmongBtns[i].className = woodsAmongBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: otherTerrain
+    var otherTerrainBtns = document.getElementById('otherTerrain').getElementsByClassName('button');
+    for (var i = 0; i < otherTerrainBtns.length; i++) otherTerrainBtns[i].className = otherTerrainBtns[i].className.replace(' is-inverted', '');
+    // Reset Other: otherHeat
+    selectUntilNumberButton(null, 'otherHeat', 0);
+    // Reset Range (both rows)
+    var rangeBtns = document.getElementById('Range').getElementsByClassName('button');
+    for (var i = 0; i < rangeBtns.length; i++) rangeBtns[i].className = rangeBtns[i].className.replace(' is-inverted', '');
+    // Reset Manual Mod+
+    selectUntilNumberButton(null, 'manualModPlus', 0);
+    manualModPlus = 0;
+    // Reset Manual Mod-
+    selectUntilNumberButton(null, 'manualModMinus', 0);
+    manualModMinus = 0;
+    // Reset Other state vars
+    otherWoodsBetween = 0;
+    otherWoodsAmong = 0;
+    otherTerrain = 0;
+    otherHeat = 0;
+    // Recompute TN
+    sumModifierValue();
+    // Restore tab
+    for (var i = 0; i < tabEls.length; i++) {
+      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
+    }
+    tabEls[activeTabIdx].className += ' is-active';
+    var tabNames = ['Gunnery','Attacker','Target','Other','Range'];
+    var contentTabs = document.getElementsByClassName('content-tab');
+    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
+    document.getElementById(tabNames[activeTabIdx]).style.display = 'block';
+  }
+  // Add visual feedback for button press
+  var resetBtn = document.getElementById('resetSatorBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('mousedown', function() {
+      resetBtn.classList.add('is-active');
+    });
+    resetBtn.addEventListener('mouseup', function() {
+      resetBtn.classList.remove('is-active');
+    });
+    resetBtn.addEventListener('mouseleave', function() {
+      resetBtn.classList.remove('is-active');
+    });
+    resetBtn.addEventListener('touchstart', function() {
+      resetBtn.classList.add('is-active');
+    });
+    resetBtn.addEventListener('touchend', function() {
+      resetBtn.classList.remove('is-active');
+    });
   }
 </script>
 

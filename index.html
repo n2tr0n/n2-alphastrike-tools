@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Alpha Strike Tools</title>
+    <title>Homebrew Alpha Strike Tools</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -58,23 +58,23 @@
   </head>
   <body>
     <script>
-const appVersion = '0.9.3b';
-
-window.onload = (event) => {
-  document.getElementById('appVersion').innerHTML = 'app version: ' + appVersion;
-};
+// Fetch version from version.json and display in the footer
+fetch('version.json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('appVersion').innerHTML = 'app version: ' + data.version;
+  });
+// Service worker logic (unchanged)
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistration().then (registration => {
     const firstRegistration = (registration === undefined);
     navigator.serviceWorker.register('service-worker.js').then(registration => {
-      // If this is not the first registration, check if an update has been found.
       if (!firstRegistration) {
         registration.addEventListener('updatefound', () => {
           const installingWorker = registration.installing;
           if (installingWorker != null) {
             installingWorker.onstatechange = e => {
               if (e.target.state == 'installed') {
-                // registration.unregister();  // commented out because its effectiveness is questionable
                 var viewAppVersion = document.getElementById('appVersion').innerHTML;
                 viewAppVersion = viewAppVersion + '(update!)';
                 document.getElementById('appVersion').innerHTML = viewAppVersion;
@@ -91,11 +91,11 @@ if ('serviceWorker' in navigator) {
       <div class="hero-head">
         <div class="container has-text-centered">
           <p class="title">
-            Alpha Strike Tools
+            Homebrew Alpha Strike Tools
           </p>
           <div class="buttons">
 <!--             <button class="button is-link is-fullwidth" onclick="location.href='./bv-calculator.html'">BV calculator</button> -->
-            <button class="button is-link is-fullwidth" style="height:auto;" onclick="location.href='./sator.html'">Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</button>
+            <button class="button is-link is-fullwidth" style="height:auto;" onclick="location.href='./sator.html'">Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</button>
 <!--            <button class="button is-link is-fullwidth" onclick="location.href='./HitLocationTable.html'">Roll Hit Location Table</button> -->
           </div>
         </div>

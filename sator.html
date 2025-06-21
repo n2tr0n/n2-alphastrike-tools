@@ -669,10 +669,9 @@
         buttons[i].className += ' is-white';
       }
     }
-    // Set the value in the table (row 3, col 1)
-    var table = document.getElementById('viewTable');
-    table.rows[3].cells[1].firstChild.data = value;
-    sumModifierValue();
+    // Store the value for heat (should be the selected value, not cumulative)
+    otherHeat = value;
+    updateOtherSum();
   }
 </script>
 

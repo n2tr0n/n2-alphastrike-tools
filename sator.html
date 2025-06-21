@@ -486,6 +486,12 @@
     sumModifierValue();
   }
 
+  // Track each 'Other' group value separately
+  var otherWoodsBetween = 0;
+  var otherWoodsAmong = 0;
+  var otherTerrain = 0;
+  var otherHeat = 0;
+
   function updateOther(evt, targetId, index, value) {
     // Special case: if targetId is 'otherHeat', use fill-in behavior like Skill/TMM
     if (targetId === 'otherHeat') {
@@ -501,10 +507,9 @@
           buttons[i].className += ' is-white';
         }
       }
-      // Set the value in the table to the selected heat (index)
-      var table = document.getElementById('viewTable');
-      table.rows[3].cells[1].firstChild.data = value;
-      sumModifierValue();
+      // Store the value for heat
+      otherHeat = value;
+      updateOtherSum();
       return;
     }
     // Special case: woodsBetween (allow both buttons to be toggled independently)
@@ -517,16 +522,47 @@
       } else {
         buttons[index].className += ' is-inverted';
       }
-      // Sum all selected modifiers
+      // Sum all selected modifiers for woodsBetween
       var total = 0;
       for (var i = 0; i < buttons.length; i++) {
         if (buttons[i].className.indexOf(' is-inverted') !== -1) {
           total += Number(buttons[i].attributes.modValue.value);
         }
       }
-      var table = document.getElementById('viewTable');
-      table.rows[3].cells[1].firstChild.data = total;
-      sumModifierValue();
+      otherWoodsBetween = total;
+      updateOtherSum();
+      return;
+    }
+    // Special case: woodsAmong (single-select)
+    if (targetId === 'woodsAmong') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+      }
+      if (buttons[index].className.indexOf(' is-inverted') === -1) {
+        buttons[index].className += ' is-inverted';
+        otherWoodsAmong = value;
+      } else {
+        otherWoodsAmong = 0;
+      }
+      updateOtherSum();
+      return;
+    }
+    // Special case: otherTerrain (single-select)
+    if (targetId === 'otherTerrain') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+      }
+      if (buttons[index].className.indexOf(' is-inverted') === -1) {
+        buttons[index].className += ' is-inverted';
+        otherTerrain = value;
+      } else {
+        otherTerrain = 0;
+      }
+      updateOtherSum();
       return;
     }
     //Get selected button index, and modValue.
@@ -553,6 +589,12 @@
       buttons[index].className += " is-inverted";
       table.rows[3].cells[1].firstChild.data = Number(table.rows[3].cells[1].firstChild.data) - subtractValue + value;
     }
+    sumModifierValue();
+  }
+
+  function updateOtherSum() {
+    var table = document.getElementById('viewTable');
+    table.rows[3].cells[1].firstChild.data = otherWoodsBetween + otherWoodsAmong + otherTerrain + otherHeat;
     sumModifierValue();
   }
 

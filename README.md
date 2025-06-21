@@ -30,4 +30,4 @@ Questions, ideas, or want to help? Reach out to the maintainer:
 
 ---
 
-<sub>Originally inspired by [battletech_tools by chinmi977](https://github.com/chinmi977/battletech_tools).</sub>
+<sub>Originally inspired by [battletech_tools by chinmi977](https://github.com/chinmi977/battletech_tools) — [UI link](https://chinmi977.github.io/battletech_tools/index.html).</sub>

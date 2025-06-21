@@ -77,7 +77,7 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
-    /* Range buttons: match Skill/TMM/Heat bar behavior */
+    /* Range buttons: individual toggle, not fill-in */
     #Range .button.is-white {
       background-color: #fff !important;
       color: #23272a !important;
@@ -639,7 +639,7 @@
 
   var prevSelectRangeAttribute;
   function updateRange(evt, num, value, selectAttribute) {
-    // Fill in all buttons up to and including selected index with black, rest white
+    // Only the selected button is black, others are white
     var elem = document.getElementById('Range');
     if (elem) {
       var buttons = elem.getElementsByClassName('button');
@@ -647,7 +647,7 @@
         buttons[i].className = buttons[i].className.replace(' is-black', '');
         buttons[i].className = buttons[i].className.replace(' is-white', '');
         buttons[i].className = buttons[i].className.replace(' is-active', '');
-        if (i <= num) {
+        if (i === num) {
           buttons[i].className += ' is-black is-active';
         } else {
           buttons[i].className += ' is-white';

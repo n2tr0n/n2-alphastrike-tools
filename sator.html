@@ -77,6 +77,29 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
+    /* Range buttons: match Skill/TMM/Heat bar behavior */
+    #Range .button.is-white {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+    }
+    #Range .button.is-black, #Range .button.is-black.is-active {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
+    /* Manual Mod+ and Mod-: match Skill/TMM/Heat bar behavior */
+    #manualModPlus .button.is-white, #manualModMinus .button.is-white {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+    }
+    #manualModPlus .button.is-black, #manualModPlus .button.is-black.is-active,
+    #manualModMinus .button.is-black, #manualModMinus .button.is-black.is-active {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
 
     @media (max-width: 900px) {
       #mainNav {
@@ -616,51 +639,79 @@
 
   var prevSelectRangeAttribute;
   function updateRange(evt, num, value, selectAttribute) {
-    prevSelectRangeAttribute = selectButton(event, 'Range', num, prevSelectRangeAttribute, selectAttribute);
-    setTableValue(event, 'viewTable', 4, 1, value)
+    // Fill in all buttons up to and including selected, like Skill/TMM/Heat
+    var rangeGroups = [
+      ['Range', 0, 3], // Classic: Short, Medium, Long
+      ['Range', 3, 6]  // EasyShot: Short, Medium, Long
+    ];
+    var found = false;
+    for (var g = 0; g < rangeGroups.length; g++) {
+      var group = rangeGroups[g];
+      var elem = document.getElementById(group[0]);
+      var buttons = elem.getElementsByClassName('button');
+      if (num >= group[1] && num < group[2]) {
+        for (var i = group[1]; i < group[2]; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-black', '');
+          buttons[i].className = buttons[i].className.replace(' is-white', '');
+          buttons[i].className = buttons[i].className.replace(' is-active', '');
+          if (i <= num) {
+            buttons[i].className += ' is-black is-active';
+          } else {
+            buttons[i].className += ' is-white';
+          }
+        }
+        found = true;
+      } else {
+        // Unselect other group
+        for (var i = group[1]; i < group[2]; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-black', '');
+          buttons[i].className = buttons[i].className.replace(' is-white', '');
+          buttons[i].className = buttons[i].className.replace(' is-active', '');
+          buttons[i].className += ' is-white';
+        }
+      }
+    }
+    setTableValue(event, 'viewTable', 4, 1, value);
     sumModifierValue();
   }
 
   function updateManualModPlus(evt, index, value) {
     var elem = document.getElementById('manualModPlus');
-    var buttons = elem.getElementsByClassName("button");
-    var subtractValue = 0;
-    var unselect = false;
+    var buttons = elem.getElementsByClassName('button');
     for (var i = 0; i < buttons.length; i++) {
-      if (buttons[i].className.indexOf(" is-inverted") != -1) {
-        subtractValue = Number(buttons[i].attributes.modValue.value);
-        if (i == index) {
-          unselect = true;
-        }
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
       }
-      buttons[i].className = buttons[i].className.replace(" is-inverted", "");
     }
-    if (unselect) {
+    if (index === 0 && value === 0 && buttons[0].className.indexOf(' is-black') === -1) {
       manualModPlus = 0;
     } else {
-      buttons[index].className += " is-inverted";
       manualModPlus = value;
     }
     sumModifierValue();
   }
+
   function updateManualModMinus(evt, index, value) {
     var elem = document.getElementById('manualModMinus');
-    var buttons = elem.getElementsByClassName("button");
-    var subtractValue = 0;
-    var unselect = false;
+    var buttons = elem.getElementsByClassName('button');
     for (var i = 0; i < buttons.length; i++) {
-      if (buttons[i].className.indexOf(" is-inverted") != -1) {
-        subtractValue = Number(buttons[i].attributes.modValue.value);
-        if (i == index) {
-          unselect = true;
-        }
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
       }
-      buttons[i].className = buttons[i].className.replace(" is-inverted", "");
     }
-    if (unselect) {
+    if (index === 0 && value === 0 && buttons[0].className.indexOf(' is-black') === -1) {
       manualModMinus = 0;
     } else {
-      buttons[index].className += " is-inverted";
       manualModMinus = value;
     }
     sumModifierValue();

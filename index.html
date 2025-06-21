@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- =========================
+         Homebrew Alpha Strike Tools
+         Main Landing Page
+         ========================= -->
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Homebrew Alpha Strike Tools</title>
@@ -9,6 +13,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <style>
+    /* ====== Global Layout & Colors ====== */
     html,
     body {
       height: 100%;
@@ -22,6 +27,7 @@
       background-color: #2c2f34 !important; /* force match with sator.html */
     }
 
+    /* ====== Footer Styling ====== */
     footer.footer-fixed-bottom {
       background-color: #2c2f34 !important;
       color: #fff !important;
@@ -30,27 +36,26 @@
       padding: 1rem 0 0.5rem 0;
       box-sizing: border-box;
     }
-
     footer.footer-fixed-bottom .content,
     footer.footer-fixed-bottom p,
     footer.footer-fixed-bottom .has-text-centered {
       color: #fff !important;
     }
 
+    /* ====== Button Styling ====== */
     /* Make active black buttons more visible on dark bg */
     .button.is-black.is-active, .button.is-black.is-inverted {
       background-color: #fff !important;
       color: #23272a !important;
       border: 1.5px solid #23272a !important;
     }
-
     .button.is-black {
       background-color: #23272a !important;
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
 
-    /* Attacker movement: default and inverted styles */
+    /* ====== Attacker Movement Button Colors (for S.A.T.O.R. UI) ====== */
     #Attacker .button {
       background-color: #fff !important;
       color: #23272a !important;
@@ -85,6 +90,9 @@
     </style>
   </head>
   <body>
+    <!-- =========================
+         Version Display & Service Worker
+         ========================= -->
     <script>
 // Fetch version from version.json and display in the footer
 fetch('version.json')
@@ -121,6 +129,7 @@ if ('serviceWorker' in navigator) {
           <p class="title">
             Homebrew Alpha Strike Tools
           </p>
+          <!-- ====== Main Navigation Buttons ====== -->
           <div class="buttons">
 <!--             <button class="button is-link is-fullwidth" onclick="location.href='./bv-calculator.html'">BV calculator</button> -->
             <button class="button is-link is-fullwidth" style="height:auto;" onclick="location.href='./sator.html'">Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</button>
@@ -129,6 +138,7 @@ if ('serviceWorker' in navigator) {
         </div>
       </div>
       <div class="hero-body">
+        <!-- (Intentionally left blank for future content) -->
       </div>
       <footer class="hero-foot">
         <div class="content has-text-centered">

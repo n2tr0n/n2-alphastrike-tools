@@ -2,12 +2,17 @@
 <html>
 
 <head>
+  <!-- =========================
+       Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)
+       Main Calculator UI
+       ========================= -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <style>
+    /* ====== Global Layout & Colors ====== */
     html,
     body {
       height: 100%;
@@ -15,17 +20,15 @@
       padding: 0;
       background-color: #2c2f34 !important; /* brighter neutral dark */
     }
-
     body {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-
     section.hero {
       flex: 1 0 auto;
     }
-
+    /* ====== Footer Styling ====== */
     footer.footer-fixed-bottom {
       background-color: #2c2f34 !important;
       color: #fff !important;
@@ -34,13 +37,12 @@
       padding: 1rem 0 0.5rem 0;
       box-sizing: border-box;
     }
-
     footer.footer-fixed-bottom .content,
     footer.footer-fixed-bottom p,
     footer.footer-fixed-bottom .has-text-centered {
       color: #fff !important;
     }
-    /* Make active black buttons more visible on dark bg */
+    /* ====== Button Styling ====== */
     .button.is-black, .button.is-black.is-active, .button.is-black.is-inverted {
       background-color: #23272a !important;
       color: #fff !important;
@@ -119,7 +121,6 @@
       margin: 0 !important;
       box-shadow: none !important;
     }
-
     /* Manual Mod+ and Mod-: match Skill/TMM/Heat bar behavior */
     #manualModPlus .button.is-white, #manualModMinus .button.is-white {
       background-color: #fff !important;
@@ -132,7 +133,6 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
-
     /* Make left table wider and prevent label wrapping */
     #viewTable {
       background: #181a1b !important;
@@ -162,7 +162,6 @@
     #viewTable tr:last-child th, #viewTable tr:last-child td {
       border-bottom: none !important;
     }
-
     @media (max-width: 900px) {
       #mainNav {
         display: flex !important;
@@ -180,71 +179,19 @@
         width: 100% !important;
       }
     }
-
-    .sator-reset-btn {
-      background: linear-gradient(90deg, #e0e0e0 0%, #bfc9d1 100%);
-      color: #23272a;
-      font-weight: 700;
-      border: 2.5px solid #fff;
-      border-radius: 2em;
-      box-shadow: 0 3px 16px 0 rgba(180,180,180,0.22), 0 1.5px 0 #bfc9d1 inset;
-      padding: 0.5em 1.8em;
-      transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, transform 0.12s;
-      letter-spacing: 0.04em;
-      font-size: 1.15em;
-      outline: none;
-      position: relative;
-    }
-    .sator-reset-btn:active, .sator-reset-btn.is-active {
-      background: linear-gradient(90deg, #bfc9d1 0%, #e0e0e0 100%);
-      color: #23272a;
-      border: 2.5px solid #23272a;
-      box-shadow: 0 1.5px 6px 0 rgba(80,80,80,0.13), 0 0.5px 0 #fff inset;
-      transform: translateY(2px) scale(0.98);
-    }
-
-    /* Attacker movement: default and inverted styles */
-    #Attacker .button {
-      background-color: #fff !important;
-      color: #23272a !important;
-      border: 1.5px solid #23272a !important;
-      transition: background 0.15s, color 0.15s, border 0.15s;
-    }
-    #Attacker .button.attacker-stationary {
-      background-color: #00e676 !important; /* vivid green */
-      color: #fff !important;
-      border: 1.5px solid #00e676 !important;
-    }
-    #Attacker .button.attacker-jump {
-      background-color: #ff1744 !important; /* vivid red */
-      color: #fff !important;
-      border: 1.5px solid #ff1744 !important;
-    }
-    #Attacker .button.is-inverted.attacker-stationary {
-      background-color: #23272a !important;
-      color: #00e676 !important;
-      border: 1.5px solid #00e676 !important;
-    }
-    #Attacker .button.is-inverted.attacker-jump {
-      background-color: #23272a !important;
-      color: #ff1744 !important;
-      border: 1.5px solid #ff1744 !important;
-    }
-    #Attacker .button.is-inverted {
-      background-color: #23272a !important;
-      color: #fff !important;
-      border: 1.5px solid #fff !important;
-    }
-
   </style>
 </head>
 
 <body>
+  <!-- =========================
+       S.A.T.O.R. Calculator UI
+       ========================= -->
   <section class="hero">
     <h1 class="subtitle has-text-white-ter has-text-centered">
       Homebrew Alpha Strike Hex Play Shot Solving Computer (S.A.T.O.R.)
     </h1>
     <div class="container has-text-centered is-fluid is-marginless">
+      <!-- ====== Tab Navigation ====== -->
       <div class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
@@ -262,6 +209,7 @@
         </div>
       </div>
       <nav class="level is-mobile" id="mainNav">
+        <!-- ====== Left Table: Modifier Summary ====== -->
         <div class="level-left" style="margin-right:0; min-width: 220px; flex: 1 1 300px;">
           <div class="level-item" style="margin-right:0; width:100%;">
             <table class="table is-fullwidth" id="viewTable" style="word-break:break-word;">
@@ -294,7 +242,9 @@
             </table>
           </div>
         </div>
+        <!-- ====== Right Controls: All Tabs ====== -->
         <div class="level-right" style="margin-left:0; min-width: 220px; flex: 1 1 300px;">
+          <!-- ====== Gunnery Tab ====== -->
           <div id="Gunnery" class="content-tab">
             <p class="subtitle has-text-white-ter">Select skill level.</p>
             <p>
@@ -306,6 +256,7 @@
               <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 6);">6</a>
             </p>
           </div>
+          <!-- ====== Attacker Tab ====== -->
           <div id="Attacker" class="content-tab" style="display:none">
             <p class="subtitle has-text-white-ter">Select Attacker movement.</p>
             <p>
@@ -316,6 +267,7 @@
               <a class="button is-rounded is-danger is-small attacker-jump" onclick="updateAttacker(event, 2, 2);">Jump</a>
             </p>
           </div>
+          <!-- ====== Target Tab ====== -->
           <div id="Target" class="content-tab" style="display:none">
             <p class="subtitle has-text-white-ter">Select TMM</p>
             <p>
@@ -336,6 +288,7 @@
             </div>
             </p>
           </div>
+          <!-- ====== Other Tab ====== -->
           <div id="Other" class="content-tab is-pulled-left" style="display:none">
             <div class="columns is-mobile">
               <div class="column">
@@ -404,6 +357,7 @@
               </div>
             </div>
           </div>
+          <!-- ====== Range Tab ====== -->
           <div id="Range" class="content-tab" style="display:none">
             <p class="subtitle has-text-white-ter">Select Range (Classic)</p>
             <div class="buttons has-addons is-right">
@@ -445,7 +399,7 @@
           </div>
         </div>
       </nav>
-      <!-- Reset Button (single, above footer) -->
+      <!-- ====== Prominent Reset Button ====== -->
       <div id="resetButtonContainer" style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:1.2rem;">
         <button id="resetSatorBtn" class="button is-medium sator-reset-btn" onclick="resetSator();">
           Reset
@@ -453,6 +407,9 @@
       </div>
     </div>
   </section>
+  <!-- =========================
+       Footer: Project Link & Version
+       ========================= -->
   <footer class="footer-fixed-bottom">
     <div class="content has-text-centered">
       <p>
@@ -465,6 +422,9 @@
   </footer>
 </body>
 <script>
+  // =========================
+  // Version Display
+  // =========================
   window.onload = function() {
     fetch('version.json')
       .then(response => response.json())
@@ -476,6 +436,9 @@
       });
   };
 
+  // =========================
+  // UI Logic & State Variables
+  // =========================
   function openTab(evt, tabName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("content-tab");

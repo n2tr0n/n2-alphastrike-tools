@@ -185,30 +185,21 @@
     #viewTable tr:last-child th, #viewTable tr:last-child td {
       border-bottom: none !important;
     }
-    /* ====== Right Controls Alignment & Responsiveness ====== */
-    .level-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      max-width: 340px;
-      margin: 0 auto;
-      width: 100%;
-      gap: 1.1em;
-    }
-    .content-tab {
-      width: 100%;
-    }
-    .buttons.has-addons {
-      justify-content: flex-start !important;
-    }
-    .content-tab p.subtitle {
-      text-align: left;
-      width: 100%;
-    }
     @media (max-width: 900px) {
-      .level-right {
-        max-width: 100%;
-        align-items: stretch;
+      #mainNav {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem !important;
+      }
+      #mainNav > .level-left, #mainNav > .level-right {
+        min-width: 0 !important;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        display: block !important;
+      }
+      #mainNav .level-item {
+        width: 100% !important;
       }
     }
   </style>

@@ -4,7 +4,7 @@
 
 **Current Version:** `0.9.3b`
 
-A collection of tools for Battletech: Alpha Strike
+A collection of homebrew tools for Battletech: Alpha Strike
 
 ---
 
@@ -31,3 +31,7 @@ Questions, ideas, or want to help? Reach out to the maintainer:
 ---
 
 <sub>Originally inspired by [battletech_tools by chinmi977](https://github.com/chinmi977/battletech_tools) — [UI link](https://chinmi977.github.io/battletech_tools/index.html).</sub>
+
+<br>
+
+<sub>Battletech, Alpha Strike, and all associated marks, logos, and materials are trademarks or registered trademarks of Catalyst Game Labs. This project is a fan-made, non-commercial tool and is not affiliated with or endorsed by Catalyst Game Labs.</sub>

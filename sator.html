@@ -77,17 +77,38 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
-    /* Range buttons: individual toggle, not fill-in */
+    /* Range buttons: individual toggle, not fill-in, and use color-coded states */
     #Range .button.is-white {
       background-color: #fff !important;
       color: #23272a !important;
       border: 1.5px solid #23272a !important;
+    }
+    #Range .button.is-success {
+      background-color: #fff !important;
+      color: #00c853 !important;
+      border: 1.5px solid #00c853 !important;
+    }
+    #Range .button.is-success.is-inverted {
+      background-color: #23272a !important;
+      color: #00c853 !important;
+      border: 1.5px solid #00c853 !important;
+    }
+    #Range .button.is-link {
+      background-color: #fff !important;
+      color: #1976d2 !important;
+      border: 1.5px solid #1976d2 !important;
+    }
+    #Range .button.is-link.is-inverted {
+      background-color: #23272a !important;
+      color: #1976d2 !important;
+      border: 1.5px solid #1976d2 !important;
     }
     #Range .button.is-black, #Range .button.is-black.is-active {
       background-color: #23272a !important;
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
+
     /* Manual Mod+ and Mod-: match Skill/TMM/Heat bar behavior */
     #manualModPlus .button.is-white, #manualModMinus .button.is-white {
       background-color: #fff !important;
@@ -639,19 +660,31 @@
 
   var prevSelectRangeAttribute;
   function updateRange(evt, num, value, selectAttribute) {
-    // Only the selected button is black, others are white
+    // There are two rows of range buttons: Classic (0-2) and EasyShot (3-5)
     var elem = document.getElementById('Range');
     if (elem) {
       var buttons = elem.getElementsByClassName('button');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].className = buttons[i].className.replace(' is-black', '');
-        buttons[i].className = buttons[i].className.replace(' is-white', '');
-        buttons[i].className = buttons[i].className.replace(' is-active', '');
-        if (i === num) {
-          buttons[i].className += ' is-black is-active';
-        } else {
-          buttons[i].className += ' is-white';
+      // Classic: 0-2, EasyShot: 3-5
+      if (num <= 2) {
+        // Un-invert EasyShot row
+        for (var i = 3; i <= 5; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
         }
+        // Only invert the selected Classic button
+        for (var i = 0; i <= 2; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        buttons[num].className += ' is-inverted';
+      } else {
+        // Un-invert Classic row
+        for (var i = 0; i <= 2; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        // Only invert the selected EasyShot button
+        for (var i = 3; i <= 5; i++) {
+          buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+        }
+        buttons[num].className += ' is-inverted';
       }
     }
     setTableValue(event, 'viewTable', 4, 1, value)

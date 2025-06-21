@@ -507,6 +507,28 @@
       sumModifierValue();
       return;
     }
+    // Special case: woodsBetween (allow both buttons to be toggled independently)
+    if (targetId === 'woodsBetween') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      // Toggle the clicked button
+      if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+        buttons[index].className = buttons[index].className.replace(' is-inverted', '');
+      } else {
+        buttons[index].className += ' is-inverted';
+      }
+      // Sum all selected modifiers
+      var total = 0;
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].className.indexOf(' is-inverted') !== -1) {
+          total += Number(buttons[i].attributes.modValue.value);
+        }
+      }
+      var table = document.getElementById('viewTable');
+      table.rows[3].cells[1].firstChild.data = total;
+      sumModifierValue();
+      return;
+    }
     //Get selected button index, and modValue.
     var elem = document.getElementById(targetId);
     var buttons = elem.getElementsByClassName("button");

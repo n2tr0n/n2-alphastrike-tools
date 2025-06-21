@@ -202,6 +202,40 @@
       box-shadow: 0 1.5px 6px 0 rgba(80,80,80,0.13), 0 0.5px 0 #fff inset;
       transform: translateY(2px) scale(0.98);
     }
+
+    /* Attacker movement: default and inverted styles */
+    #Attacker .button {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+      transition: background 0.15s, color 0.15s, border 0.15s;
+    }
+    #Attacker .button.attacker-stationary {
+      background-color: #00e676 !important; /* vivid green */
+      color: #fff !important;
+      border: 1.5px solid #00e676 !important;
+    }
+    #Attacker .button.attacker-jump {
+      background-color: #ff1744 !important; /* vivid red */
+      color: #fff !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    #Attacker .button.is-inverted.attacker-stationary {
+      background-color: #23272a !important;
+      color: #00e676 !important;
+      border: 1.5px solid #00e676 !important;
+    }
+    #Attacker .button.is-inverted.attacker-jump {
+      background-color: #23272a !important;
+      color: #ff1744 !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    #Attacker .button.is-inverted {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
+
   </style>
 </head>
 
@@ -275,11 +309,11 @@
           <div id="Attacker" class="content-tab" style="display:none">
             <p class="subtitle has-text-white-ter">Select Attacker movement.</p>
             <p>
-              <a class="button is-rounded is-primary is-small"
+              <a class="button is-rounded is-small attacker-stationary"
                 onclick="updateAttacker(event, 0, -1);">Stationary/Immobile</a>
               <a class="button is-rounded is-white is-small" onclick="updateAttacker(event, 1, 0);">Ground Movement
                 (walk/run)</a>
-              <a class="button is-rounded is-danger is-small" onclick="updateAttacker(event, 2, 2);">Jump</a>
+              <a class="button is-rounded is-danger is-small attacker-jump" onclick="updateAttacker(event, 2, 2);">Jump</a>
             </p>
           </div>
           <div id="Target" class="content-tab" style="display:none">

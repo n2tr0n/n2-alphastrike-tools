@@ -49,6 +49,39 @@
       color: #fff !important;
       border: 1.5px solid #fff !important;
     }
+
+    /* Attacker movement: default and inverted styles */
+    #Attacker .button {
+      background-color: #fff !important;
+      color: #23272a !important;
+      border: 1.5px solid #23272a !important;
+      transition: background 0.15s, color 0.15s, border 0.15s;
+    }
+    #Attacker .button.attacker-stationary {
+      background-color: #00e676 !important; /* vivid green */
+      color: #fff !important;
+      border: 1.5px solid #00e676 !important;
+    }
+    #Attacker .button.attacker-jump {
+      background-color: #ff1744 !important; /* vivid red */
+      color: #fff !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    #Attacker .button.is-inverted.attacker-stationary {
+      background-color: #23272a !important;
+      color: #00e676 !important;
+      border: 1.5px solid #00e676 !important;
+    }
+    #Attacker .button.is-inverted.attacker-jump {
+      background-color: #23272a !important;
+      color: #ff1744 !important;
+      border: 1.5px solid #ff1744 !important;
+    }
+    #Attacker .button.is-inverted {
+      background-color: #23272a !important;
+      color: #fff !important;
+      border: 1.5px solid #fff !important;
+    }
     </style>
   </head>
   <body>

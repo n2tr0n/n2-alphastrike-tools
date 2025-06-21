@@ -507,12 +507,12 @@
           buttons[i].className += ' is-white';
         }
       }
-      // Store the value for heat
+      // Store the value for heat (should be the selected value, not cumulative)
       otherHeat = value;
       updateOtherSum();
       return;
     }
-    // Special case: woodsBetween (allow both buttons to be toggled independently)
+    // woodsBetween: allow both buttons to be toggled independently
     if (targetId === 'woodsBetween') {
       var elem = document.getElementById(targetId);
       var buttons = elem.getElementsByClassName('button');
@@ -533,14 +533,15 @@
       updateOtherSum();
       return;
     }
-    // Special case: woodsAmong (single-select)
+    // woodsAmong: single-select, value is 0 if none selected
     if (targetId === 'woodsAmong') {
       var elem = document.getElementById(targetId);
       var buttons = elem.getElementsByClassName('button');
+      var wasSelected = (buttons[index].className.indexOf(' is-inverted') !== -1);
       for (var i = 0; i < buttons.length; i++) {
         buttons[i].className = buttons[i].className.replace(' is-inverted', '');
       }
-      if (buttons[index].className.indexOf(' is-inverted') === -1) {
+      if (!wasSelected) {
         buttons[index].className += ' is-inverted';
         otherWoodsAmong = value;
       } else {
@@ -549,19 +550,24 @@
       updateOtherSum();
       return;
     }
-    // Special case: otherTerrain (single-select)
+    // otherTerrain: allow both buttons to be toggled independently
     if (targetId === 'otherTerrain') {
       var elem = document.getElementById(targetId);
       var buttons = elem.getElementsByClassName('button');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
-      }
-      if (buttons[index].className.indexOf(' is-inverted') === -1) {
-        buttons[index].className += ' is-inverted';
-        otherTerrain = value;
+      // Toggle the clicked button
+      if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+        buttons[index].className = buttons[index].className.replace(' is-inverted', '');
       } else {
-        otherTerrain = 0;
+        buttons[index].className += ' is-inverted';
       }
+      // Sum all selected modifiers for otherTerrain
+      var total = 0;
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].className.indexOf(' is-inverted') !== -1) {
+          total += Number(buttons[i].attributes.modValue.value);
+        }
+      }
+      otherTerrain = total;
       updateOtherSum();
       return;
     }

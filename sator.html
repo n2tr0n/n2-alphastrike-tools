@@ -131,12 +131,12 @@
           <div id="Gunnery" class="content-tab">
             <p class="subtitle has-text-white-ter">Select skill level.</p>
             <p>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 1);">1</a>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 2);">2</a>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 3);">3</a>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 4);">4</a>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 5);">5</a>
-              <a class="button is-rounded is-small is-black" onclick="updateGunnery(event, 6);">6</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 1);">1</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 2);">2</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 3);">3</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 4);">4</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 5);">5</a>
+              <a class="button is-rounded is-small is-white" onclick="updateGunnery(event, 6);">6</a>
             </p>
           </div>
           <div id="Attacker" class="content-tab" style="display:none">
@@ -317,13 +317,15 @@
   function selectUntilNumberButton(evt, id, num) {
     var elem = document.getElementById(id);
     var buttons = elem.getElementsByClassName("button");
-    for (i = 0; i < buttons.length; i++) {
-      buttons[i].className = buttons[i].className.replace(" is-active", "");
+    for (var i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(" is-black", "");
-    }
-    for (i = 0; i < num; i++) {
-      buttons[i].className += " is-black";
-      buttons[i].className += " is-active";
+      buttons[i].className = buttons[i].className.replace(" is-white", "");
+      buttons[i].className = buttons[i].className.replace(" is-active", "");
+      if (i < num) {
+        buttons[i].className += " is-black is-active";
+      } else {
+        buttons[i].className += " is-white";
+      }
     }
   }
 

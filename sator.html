@@ -169,13 +169,13 @@
             <p class="subtitle has-text-white-ter">Select TMM</p>
             <p>
             <div class="buttons has-addons is-right" id="targetBasic">
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 0);">0</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 1);">1</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 2);">2</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 3);">3</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 4);">4</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 5);">5</a>
-              <a class="button is-rounded is-white is-small" onclick="updateTarget(event, 6);">6</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 0);">0</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 1);">1</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 2);">2</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 3);">3</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 4);">4</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 5);">5</a>
+              <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 6);">6</a>
             </div>
             <div class="buttons has-addons is-right" id="targetJump">
               <a class="button is-rounded is-white is-small" onclick="updateTargetJump(event);">Jump</a>
@@ -418,6 +418,35 @@
       num = num + 1;
     }
     setTableValue(event, 'viewTable', 2, 1, num)
+    sumModifierValue();
+  }
+  function updateTargetBar(evt, num) {
+    var elem = document.getElementById('targetBasic');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= num) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    //If advanced is on, turn off advanced.
+    var advElem = document.getElementById('targetAdvanced');
+    var advButtons = advElem.getElementsByClassName('button');
+    for (i = 0; i < advButtons.length; i++) {
+      advButtons[i].className = advButtons[i].className.replace(' is-inverted', '');
+    }
+    //If jump is on, add +1.
+    var jumpElem = document.getElementById('targetJump');
+    var jumpButtons = jumpElem.getElementsByClassName('button');
+    var tmm = num;
+    if (jumpButtons[0].className.indexOf(' is-inverted') != -1) {
+      tmm = tmm + 1;
+    }
+    setTableValue(event, 'viewTable', 2, 1, tmm);
     sumModifierValue();
   }
   function updateTargetJump(evt) {

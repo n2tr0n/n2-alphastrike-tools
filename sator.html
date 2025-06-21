@@ -243,16 +243,11 @@
                 <p class="has-text-white-ter">Attacker Heat</p>
                 <div class="buttons has-addons" id="otherHeat">
                   <div class="field is-grouped">
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 0, 0);"
-                      modValue=0>0</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 1, 1);"
-                      modValue=1>1</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 2, 2);"
-                      modValue=2>2</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 3, 3);"
-                      modValue=3>3</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherHeat', 4, 4);"
-                      modValue=4>4</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 0, 0);" modValue=0>0</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 1, 1);" modValue=1>1</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 2, 2);" modValue=2>2</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 3, 3);" modValue=3>3</a>
+                    <a class="button is-rounded is-white is-small" onclick="updateOtherHeatBar(event, 4, 4);" modValue=4>4</a>
                   </div>
                 </div>
               </div>
@@ -492,6 +487,26 @@
   }
 
   function updateOther(evt, targetId, index, value) {
+    // Special case: if targetId is 'otherHeat', use fill-in behavior like Skill/TMM
+    if (targetId === 'otherHeat') {
+      var elem = document.getElementById(targetId);
+      var buttons = elem.getElementsByClassName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-black', '');
+        buttons[i].className = buttons[i].className.replace(' is-white', '');
+        buttons[i].className = buttons[i].className.replace(' is-active', '');
+        if (i <= index) {
+          buttons[i].className += ' is-black is-active';
+        } else {
+          buttons[i].className += ' is-white';
+        }
+      }
+      // Set the value in the table to the selected heat (index)
+      var table = document.getElementById('viewTable');
+      table.rows[3].cells[1].firstChild.data = value;
+      sumModifierValue();
+      return;
+    }
     //Get selected button index, and modValue.
     var elem = document.getElementById(targetId);
     var buttons = elem.getElementsByClassName("button");
@@ -568,6 +583,25 @@
       buttons[index].className += " is-inverted";
       manualModMinus = value;
     }
+    sumModifierValue();
+  }
+
+  function updateOtherHeatBar(evt, index, value) {
+    var elem = document.getElementById('otherHeat');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= index) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    // Set the value in the table (row 3, col 1)
+    var table = document.getElementById('viewTable');
+    table.rows[3].cells[1].firstChild.data = value;
     sumModifierValue();
   }
 </script>

@@ -1053,6 +1053,56 @@
     orig_updateTargetAdvanced(evt, num, value);
     updateTargetAeroSum();
   }
+
+  function updateRange(evt, num, value) {
+    // There are 6 range buttons (3 classic, 3 easyshot), but only one can be selected at a time
+    var rangePanel = document.getElementById('Range');
+    var buttons = rangePanel.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+    }
+    buttons[num].className += ' is-inverted';
+    // Set value in table (row 4, col 1)
+    var table = document.getElementById('viewTable');
+    table.rows[4].cells[1].firstChild.data = value;
+    sumModifierValue();
+  }
+
+  function updateManualModPlus(evt, num, value) {
+    // Only one Manual Mod+ button can be selected at a time
+    var elem = document.getElementById('manualModPlus');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= num) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    manualModPlus = value;
+    sumModifierValue();
+  }
+
+  function updateManualModMinus(evt, num, value) {
+    // Only one Manual Mod- button can be selected at a time
+    var elem = document.getElementById('manualModMinus');
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].className = buttons[i].className.replace(' is-black', '');
+      buttons[i].className = buttons[i].className.replace(' is-white', '');
+      buttons[i].className = buttons[i].className.replace(' is-active', '');
+      if (i <= num) {
+        buttons[i].className += ' is-black is-active';
+      } else {
+        buttons[i].className += ' is-white';
+      }
+    }
+    manualModMinus = value;
+    sumModifierValue();
+  }
 </script>
 
 </html>

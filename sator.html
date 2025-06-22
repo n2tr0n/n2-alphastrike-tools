@@ -521,6 +521,7 @@
           versionElem.innerHTML = 'app version: ' + data.version;
         }
       });
+    setDefaultAeroButtonColors();
   };
 
   // =========================
@@ -879,6 +880,7 @@
     for (var i = 0; i < targetAeroBtns.length; i++) {
       targetAeroBtns[i].className = targetAeroBtns[i].className.replace(' is-inverted', '');
     }
+    setDefaultAeroButtonColors();
     // Reset Other: woodsBetween
     var woodsBetweenBtns = document.getElementById('woodsBetween').getElementsByClassName('button');
     for (var i = 0; i < woodsBetweenBtns.length; i++) woodsBetweenBtns[i].className = woodsBetweenBtns[i].className.replace(' is-inverted', '');
@@ -939,6 +941,30 @@
 
   // --- Aerospace Movement Logic ---
   var targetAero = 0;
+  function setDefaultAeroButtonColors() {
+    var elem = document.getElementById('targetAero');
+    if (!elem) return;
+    var buttons = elem.getElementsByClassName('button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].style.backgroundColor = '';
+      buttons[i].style.color = '';
+      buttons[i].style.border = '';
+      var mod = buttons[i].getAttribute('modValue');
+      if (mod == '1') {
+        buttons[i].style.backgroundColor = '#00c853';
+        buttons[i].style.color = '#fff';
+        buttons[i].style.border = '1.5px solid #00c853';
+      } else if (mod == '2') {
+        buttons[i].style.backgroundColor = '#1976d2';
+        buttons[i].style.color = '#fff';
+        buttons[i].style.border = '1.5px solid #1976d2';
+      } else if (mod == '-2') {
+        buttons[i].style.backgroundColor = '#ffab00';
+        buttons[i].style.color = '#fff';
+        buttons[i].style.border = '1.5px solid #ffab00';
+      }
+    }
+  }
   function updateTargetAero(evt, index, value) {
     var elem = document.getElementById('targetAero');
     var buttons = elem.getElementsByClassName('button');
@@ -946,15 +972,16 @@
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(' is-inverted', '');
       // Set base color for all (colored bg, white text, colored border)
-      if (buttons[i].getAttribute('modValue') == '1') {
+      var mod = buttons[i].getAttribute('modValue');
+      if (mod == '1') {
         buttons[i].style.backgroundColor = '#00c853';
         buttons[i].style.color = '#fff';
         buttons[i].style.border = '1.5px solid #00c853';
-      } else if (buttons[i].getAttribute('modValue') == '2') {
+      } else if (mod == '2') {
         buttons[i].style.backgroundColor = '#1976d2';
         buttons[i].style.color = '#fff';
         buttons[i].style.border = '1.5px solid #1976d2';
-      } else if (buttons[i].getAttribute('modValue') == '-2') {
+      } else if (mod == '-2') {
         buttons[i].style.backgroundColor = '#ffab00';
         buttons[i].style.color = '#fff';
         buttons[i].style.border = '1.5px solid #ffab00';

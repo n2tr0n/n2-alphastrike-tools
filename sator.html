@@ -923,7 +923,7 @@
     var tabEls = document.getElementsByClassName('tab');
     var contentTabs = document.getElementsByClassName('content-tab');
     for (var i = 0; i < tabEls.length; i++) {
-      tabEls[i].className = tabLs[i].className.replace(' is-active', '');
+      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
     }
     tabEls[0].className += ' is-active';
     for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';

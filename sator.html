@@ -1038,11 +1038,11 @@
     sumModifierValue();
   }
   // Patch updateTargetBar, updateTargetJump, updateTargetAdvanced to call updateTargetAeroSum
-  var orig_updateTargetBar = updateTargetBar;
-  updateTargetBar = function(evt, num) {
-    orig_updateTargetBar(evt, num);
-    updateTargetAeroSum();
-  }
+  // var orig_updateTargetBar = updateTargetBar;
+  // updateTargetBar = function(evt, num) {
+  //   orig_updateTargetBar(evt, num);
+  //   updateTargetAeroSum();
+  // }
   var orig_updateTargetJump = updateTargetJump;
   updateTargetJump = function(evt) {
     orig_updateTargetJump(evt);

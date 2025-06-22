@@ -486,6 +486,9 @@
         <button id="resetSatorBtn" class="button is-medium sator-reset-btn" onclick="resetSator();">
           Reset
         </button>
+        <button id="resetSatorSBtn" class="button is-medium sator-reset-btn" style="margin-left:1em;" onclick="resetSatorS();">
+          Reset-S
+        </button>
       </div>
     </div>
   </section>
@@ -914,6 +917,18 @@
     for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
     document.getElementById(tabNames[activeTabIdx]).style.display = 'block';
   }
+  function resetSatorS() {
+    resetSator();
+    // Switch to S tab (Gunnery)
+    var tabEls = document.getElementsByClassName('tab');
+    var contentTabs = document.getElementsByClassName('content-tab');
+    for (var i = 0; i < tabEls.length; i++) {
+      tabEls[i].className = tabLs[i].className.replace(' is-active', '');
+    }
+    tabEls[0].className += ' is-active';
+    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
+    document.getElementById('Gunnery').style.display = 'block';
+  }
   // Add visual feedback for button press
   var resetBtn = document.getElementById('resetSatorBtn');
   if (resetBtn) {
@@ -931,6 +946,24 @@
     });
     resetBtn.addEventListener('touchend', function() {
       resetBtn.classList.remove('is-active');
+    });
+  }
+  var resetSBtn = document.getElementById('resetSatorSBtn');
+  if (resetSBtn) {
+    resetSBtn.addEventListener('mousedown', function() {
+      resetSBtn.classList.add('is-active');
+    });
+    resetSBtn.addEventListener('mouseup', function() {
+      resetSBtn.classList.remove('is-active');
+    });
+    resetSBtn.addEventListener('mouseleave', function() {
+      resetSBtn.classList.remove('is-active');
+    });
+    resetSBtn.addEventListener('touchstart', function() {
+      resetSBtn.classList.add('is-active');
+    });
+    resetSBtn.addEventListener('touchend', function() {
+      resetSBtn.classList.remove('is-active');
     });
   }
 

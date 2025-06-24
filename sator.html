@@ -361,7 +361,7 @@
           <!-- ====== Target Tab ====== -->
           <div id="Target" class="content-tab" style="display:none">
             <p class="section-title">TMM</p>
-            <div class="buttons has-addons is-right" id="targetBasic">
+            <div class="buttons has-addons" id="targetBasic" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 0);">0</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 1);">1</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 2);">2</a>
@@ -371,7 +371,7 @@
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 6);">6</a>
             </div>
             <p class="section-title">Movement Type</p>
-            <div class="buttons has-addons is-right" id="targetJumpImmobile" style="margin-bottom:0.5em;">
+            <div class="buttons has-addons" id="targetJumpImmobile" style="display: flex; justify-content: center; margin-bottom:0.5em;">
               <a class="button is-rounded is-small attacker-jump" style="border:1.5px solid #ff1744; background-color:#ff1744; color:#fff;" onclick="updateTargetJump(event);">Jump</a>
               <a class="button is-rounded is-small attacker-stationary" style="border:1.5px solid #00e676; background-color:#00e676; color:#fff;" onclick="updateTargetAdvanced(event, 0, -4);">Immobile</a>
             </div>

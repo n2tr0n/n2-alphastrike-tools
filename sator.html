@@ -350,20 +350,18 @@
               <a class="button is-rounded is-danger is-small attacker-jump" onclick="updateAttacker(event, 2, 2);">Jump</a>
             </p>
             <p class="section-title">Attacker Heat</p>
-            <div class="buttons has-addons" id="attackerHeat">
-              <div class="field is-grouped">
-                <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 0, 0);" modValue=0>0</a>
-                <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 1, 1);" modValue=1>1</a>
-                <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 2, 2);" modValue=2>2</a>
-                <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 3, 3);" modValue=3>3</a>
-                <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 4, 4);" modValue=4>4</a>
-              </div>
+            <div class="buttons has-addons" id="attackerHeat" style="display: flex; justify-content: center;">
+              <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 0, 0);" modValue=0>0</a>
+              <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 1, 1);" modValue=1>1</a>
+              <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 2, 2);" modValue=2>2</a>
+              <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 3, 3);" modValue=3>3</a>
+              <a class="button is-rounded is-small" onclick="updateAttackerHeatBar(event, 4, 4);" modValue=4>4</a>
             </div>
           </div>
           <!-- ====== Target Tab ====== -->
           <div id="Target" class="content-tab" style="display:none">
             <p class="section-title">TMM</p>
-            <div class="buttons has-addons is-right" id="targetBasic">
+            <div class="buttons has-addons" id="targetBasic" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 0);">0</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 1);">1</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 2);">2</a>
@@ -373,68 +371,46 @@
               <a class="button is-rounded is-small is-white" onclick="updateTargetBar(event, 6);">6</a>
             </div>
             <p class="section-title">Movement Type</p>
-            <div class="buttons has-addons is-right" id="targetJumpImmobile" style="margin-bottom:0.5em;">
+            <div class="buttons has-addons" id="targetJumpImmobile" style="display: flex; justify-content: center; margin-bottom:0.5em;">
               <a class="button is-rounded is-small attacker-jump" style="border:1.5px solid #ff1744; background-color:#ff1744; color:#fff;" onclick="updateTargetJump(event);">Jump</a>
               <a class="button is-rounded is-small attacker-stationary" style="border:1.5px solid #00e676; background-color:#00e676; color:#fff;" onclick="updateTargetAdvanced(event, 0, -4);">Immobile</a>
             </div>
             <p class="section-title">Aerospace Movement</p>
-            <div class="buttons has-addons is-right" id="targetAero">
+            <div class="buttons has-addons" id="targetAero" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-small is-white" onclick="updateTargetAero(event, 0, 1);" modValue=1>WIGE/VTOL +1</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetAero(event, 1, 2);" modValue=2>Fixed Wing +2</a>
               <a class="button is-rounded is-small is-white" onclick="updateTargetAero(event, 2, -2);" modValue=-2>Airborn Dropship -2</a>
             </div>
           </div>
           <!-- ====== Other Tab ====== -->
-          <div id="Other" class="content-tab is-pulled-left" style="display:none">
-            <div class="columns is-mobile">
-              <div class="column is-narrow">
-                <p class="section-title">Woods/Jungle Between</p>
-                <div class="buttons has-addons" id="woodsBetween">
-                  <div class="field is-grouped">
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsBetween', 0, 1);"
-                      modValue=1>Light ‹3</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsBetween', 1, 2);"
-                      modValue=2>Heavy ‹2</a>
-                  </div>
-                </div>
+          <div id="Other" class="content-tab" style="display:none">
+            <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <p class="section-title" style="text-align:center;width:100%;">Woods/Jungle Between</p>
+              <div class="buttons has-addons" id="woodsBetween" style="display:flex;justify-content:center;width:100%;">
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsBetween', 0, 1);" modValue=1>Light ‹3</a>
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsBetween', 1, 2);" modValue=2>Heavy ‹2</a>
               </div>
             </div>
-            <div class="columns is-mobile">
-              <div class="column is-narrow">
-                <p class="section-title">Target Woods Among</p>
-                <div class="buttons has-addons" id="woodsAmong">
-                  <div class="field is-grouped">
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 0, 1);"
-                      modValue=1>Light</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 1, 2);"
-                      modValue=2>Heavy</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 2, 3);"
-                      modValue=3>Ultra-Heavy</a>
-                  </div>
-                </div>
+            <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <p class="section-title" style="text-align:center;width:100%;">Target Woods Among</p>
+              <div class="buttons has-addons" id="woodsAmong" style="display:flex;justify-content:center;width:100%;">
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 0, 1);" modValue=1>Light</a>
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 1, 2);" modValue=2>Heavy</a>
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'woodsAmong', 2, 3);" modValue=3>Ultra-Heavy</a>
               </div>
             </div>
-            <div class="columns is-mobile">
-              <div class="column is-narrow">
-                <p class="section-title">Terrain Cover</p>
-                <div class="buttons has-addons" id="otherTerrain">
-                  <div class="field is-grouped">
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherTerrain', 0, 1);"
-                      modValue=1>Partial cover</a>
-                    <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherTerrain', 1, 1);"
-                      modValue=1>Water Lv,1</a>
-                  </div>
-                </div>
+            <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <p class="section-title" style="text-align:center;width:100%;">Terrain Cover</p>
+              <div class="buttons has-addons" id="otherTerrain" style="display:flex;justify-content:center;width:100%;">
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherTerrain', 0, 1);" modValue=1>Partial cover</a>
+                <a class="button is-rounded is-white is-small" onclick="updateOther(event, 'otherTerrain', 1, 1);" modValue=1>Water Lv,1</a>
               </div>
             </div>
             <div class="columns is-mobile">
               <div class="column is-narrow">
                 <!-- <p class="has-text-white-ter">2nd target</p> -->
                 <div class="buttons has-addons" id="seconderyTarget">
-                  <div class="field is-grouped">
-                    <!-- <a class="button is-white is-small" onclick="updateOther(event, 'seconderyTarget', 0, 1);" modValue=1>forward arc</a> -->
-                    <!-- <a class="button is-white is-small" onclick="updateOther(event, 'seconderyTarget', 1, 2);" modValue=2>side or rear arc</a> -->
-                  </div>
+                  <!-- No buttons currently -->
                 </div>
               </div>
             </div>
@@ -442,20 +418,20 @@
           <!-- ====== Range Tab ====== -->
           <div id="Range" class="content-tab" style="display:none">
             <p class="section-title">Select Range (Classic)</p>
-            <div class="buttons has-addons is-right">
+            <div class="buttons has-addons" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-white is-small" onclick="updateRange(event, 0, 0);">Short</a>
               <a class="button is-rounded is-success is-small" onclick="updateRange(event, 1, 2);">Medium +2</a>
               <a class="button is-rounded is-link is-small" onclick="updateRange(event, 2, 4);">Long +4</a>
             </div>
             <p class="section-title">Select Range (EasyShot™)</p>
-            <div class="buttons has-addons is-right">
+            <div class="buttons has-addons" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-white is-small" onclick="updateRange(event, 3, 0);">Short</a>
               <a class="button is-rounded is-success is-small" onclick="updateRange(event, 4, 1);">Medium +1</a>
               <a class="button is-rounded is-link is-small" onclick="updateRange(event, 5, 2);">Long +2</a>
             </div>
             <p class="title is-1"><!-- White space for adjustment.--></p>
             <p class="section-title">Manual Mod +</p>
-            <div class="buttons has-addons is-right" id="manualModPlus">
+            <div class="buttons has-addons" id="manualModPlus" style="display: flex; justify-content: center;">
               <div class="field is-grouped">
                 <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 0, 0);" modValue=0>+0</a>
                 <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 1, 1);" modValue=1>+1</a>
@@ -467,7 +443,7 @@
               </div>
             </div>
             <p class="section-title">Manual Mod -</p>
-            <div class="buttons has-addons is-right" id="manualModMinus">
+            <div class="buttons has-addons" id="manualModMinus" style="display: flex; justify-content: center;">
               <div class="field is-grouped">
                 <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 0, 0);" modValue=0>-0</a>
                 <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 1, -1);" modValue=-1>-1</a>

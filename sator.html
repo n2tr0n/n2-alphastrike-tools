@@ -487,7 +487,7 @@
           Reset
         </button>
         <button id="resetSatorSBtn" class="button is-medium sator-reset-btn" style="margin-left:1em;" onclick="resetSatorS();">
-          Reset-S
+          Reset All
         </button>
       </div>
     </div>
@@ -829,9 +829,9 @@
   }
 
   // --- RESET FUNCTIONALITY ---
-  document.getElementById('resetSatorBtn').onclick = resetSator;
-  function resetSator() {
-    // Save current tab
+  document.getElementById('resetSatorBtn').onclick = resetCurrentTab;
+  function resetCurrentTab() {
+    // Find active tab
     var tabEls = document.getElementsByClassName('tab');
     var activeTabIdx = 0;
     for (var i = 0; i < tabEls.length; i++) {
@@ -840,6 +840,81 @@
         break;
       }
     }
+    var tabNames = ['Gunnery','Attacker','Target','Other','Range'];
+    var currentTab = tabNames[activeTabIdx];
+    var table = document.getElementById('viewTable');
+    // Reset logic per tab
+    if (currentTab === 'Gunnery') {
+      // Reset Skill bar and table row
+      selectUntilNumberButton(null, 'Gunnery', 0);
+      table.rows[0].cells[1].firstChild.data = 0;
+    } else if (currentTab === 'Attacker') {
+      // Reset Attacker movement and heat only
+      var attackerBtns = document.getElementById('Attacker').getElementsByClassName('button');
+      for (var i = 0; i < 3; i++) {
+        attackerBtns[i].className = attackerBtns[i].className.replace(' is-inverted', '');
+      }
+      window._attackerMovementValue = 0;
+      var heatBtns = document.getElementById('attackerHeat').getElementsByClassName('button');
+      for (var i = 0; i < heatBtns.length; i++) {
+        heatBtns[i].className = heatBtns[i].className.replace(' is-black', '');
+        heatBtns[i].className = heatBtns[i].className.replace(' is-white', '');
+        heatBtns[i].className = heatBtns[i].className.replace(' is-active', '');
+        heatBtns[i].className = heatBtns[i].className.trim();
+      }
+      window._attackerHeatValue = 0;
+      selectUntilNumberButton(null, 'attackerHeat', 0);
+      table.rows[1].cells[1].firstChild.data = 0;
+    } else if (currentTab === 'Target') {
+      // Reset TMM, Jump/Immobile, Aero only
+      selectUntilNumberButton(null, 'targetBasic', 0);
+      var jumpImmobileBtns = document.getElementById('targetJumpImmobile').getElementsByClassName('button');
+      for (var i = 0; i < jumpImmobileBtns.length; i++) {
+        jumpImmobileBtns[i].className = jumpImmobileBtns[i].className.replace(' is-inverted', '');
+      }
+      var targetAeroBtns = document.getElementById('targetAero').getElementsByClassName('button');
+      for (var i = 0; i < targetAeroBtns.length; i++) {
+        targetAeroBtns[i].className = targetAeroBtns[i].className.replace(' is-inverted', '');
+      }
+      setDefaultAeroButtonColors();
+      table.rows[2].cells[1].firstChild.data = 0;
+    } else if (currentTab === 'Other') {
+      // Reset only Other tab buttons and table row
+      var woodsBetweenBtns = document.getElementById('woodsBetween').getElementsByClassName('button');
+      for (var i = 0; i < woodsBetweenBtns.length; i++) woodsBetweenBtns[i].className = woodsBetweenBtns[i].className.replace(' is-inverted', '');
+      var woodsAmongBtns = document.getElementById('woodsAmong').getElementsByClassName('button');
+      for (var i = 0; i < woodsAmongBtns.length; i++) woodsAmongBtns[i].className = woodsAmongBtns[i].className.replace(' is-inverted', '');
+      var otherTerrainBtns = document.getElementById('otherTerrain').getElementsByClassName('button');
+      for (var i = 0; i < otherTerrainBtns.length; i++) otherTerrainBtns[i].className = otherTerrainBtns[i].className.replace(' is-inverted', '');
+      otherWoodsBetween = 0;
+      otherWoodsAmong = 0;
+      otherTerrain = 0;
+      table.rows[3].cells[1].firstChild.data = 0;
+    } else if (currentTab === 'Range') {
+      // Reset only Range and Manual Mod buttons and table row
+      var rangeBtns = document.getElementById('Range').getElementsByClassName('button');
+      for (var i = 0; i < rangeBtns.length; i++) rangeBtns[i].className = rangeBtns[i].className.replace(' is-inverted', '');
+      selectUntilNumberButton(null, 'manualModPlus', 0);
+      manualModPlus = 0;
+      selectUntilNumberButton(null, 'manualModMinus', 0);
+      manualModMinus = 0;
+      table.rows[4].cells[1].firstChild.data = 0;
+    }
+    sumModifierValue();
+  }
+  function resetSatorS() {
+    resetSator();
+    // Switch to S tab (Gunnery)
+    var tabEls = document.getElementsByClassName('tab');
+    var contentTabs = document.getElementsByClassName('content-tab');
+    for (var i = 0; i < tabEls.length; i++) {
+      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
+    }
+    tabEls[0].className += ' is-active';
+    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
+    document.getElementById('Gunnery').style.display = 'block';
+  }
+  function resetSator() {
     // Reset all table values
     var table = document.getElementById('viewTable');
     table.rows[0].cells[1].firstChild.data = 0; // Skill
@@ -864,7 +939,6 @@
       heatBtns[i].className = heatBtns[i].className.replace(' is-active', '');
       heatBtns[i].className = heatBtns[i].className.trim();
     }
-    // Do not select any heat button after reset
     window._attackerHeatValue = 0;
     // Reset Target bar (TMM)
     selectUntilNumberButton(null, 'targetBasic', 0);
@@ -890,7 +964,6 @@
     for (var i = 0; i < otherTerrainBtns.length; i++) otherTerrainBtns[i].className = otherTerrainBtns[i].className.replace(' is-inverted', '');
     // Reset Attacker Heat
     selectUntilNumberButton(null, 'attackerHeat', 0);
-    attackerHeat = 0;
     // Reset Range (both rows)
     var rangeBtns = document.getElementById('Range').getElementsByClassName('button');
     for (var i = 0; i < rangeBtns.length; i++) rangeBtns[i].className = rangeBtns[i].className.replace(' is-inverted', '');
@@ -907,27 +980,6 @@
     attackerHeat = 0;
     // Recompute TN
     sumModifierValue();
-    // Restore tab
-    for (var i = 0; i < tabEls.length; i++) {
-      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
-    }
-    tabEls[activeTabIdx].className += ' is-active';
-    var tabNames = ['Gunnery','Attacker','Target','Other','Range'];
-    var contentTabs = document.getElementsByClassName('content-tab');
-    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
-    document.getElementById(tabNames[activeTabIdx]).style.display = 'block';
-  }
-  function resetSatorS() {
-    resetSator();
-    // Switch to S tab (Gunnery)
-    var tabEls = document.getElementsByClassName('tab');
-    var contentTabs = document.getElementsByClassName('content-tab');
-    for (var i = 0; i < tabEls.length; i++) {
-      tabEls[i].className = tabEls[i].className.replace(' is-active', '');
-    }
-    tabEls[0].className += ' is-active';
-    for (var i = 0; i < contentTabs.length; i++) contentTabs[i].style.display = 'none';
-    document.getElementById('Gunnery').style.display = 'block';
   }
   // Add visual feedback for button press
   var resetBtn = document.getElementById('resetSatorBtn');
@@ -996,6 +1048,16 @@
   function updateTargetAero(evt, index, value) {
     var elem = document.getElementById('targetAero');
     var buttons = elem.getElementsByClassName('button');
+    // If already selected, deselect all (toggle off)
+    if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+      }
+      setDefaultAeroButtonColors();
+      targetAero = 0;
+      updateTargetAeroSum();
+      return;
+    }
     // Only one button selectable: deselect all, then select clicked
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(' is-inverted', '');
@@ -1014,12 +1076,6 @@
         buttons[i].style.color = '#fff';
         buttons[i].style.border = '1.5px solid #ffab00';
       }
-    }
-    // If already selected, deselect all (toggle off)
-    if (evt.currentTarget.className.indexOf(' is-inverted') !== -1) {
-      targetAero = 0;
-      updateTargetAeroSum();
-      return;
     }
     // Select clicked button, apply inverted color
     buttons[index].className += ' is-inverted';

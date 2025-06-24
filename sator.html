@@ -418,20 +418,20 @@
           <!-- ====== Range Tab ====== -->
           <div id="Range" class="content-tab" style="display:none">
             <p class="section-title">Select Range (Classic)</p>
-            <div class="buttons has-addons is-right">
+            <div class="buttons has-addons" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-white is-small" onclick="updateRange(event, 0, 0);">Short</a>
               <a class="button is-rounded is-success is-small" onclick="updateRange(event, 1, 2);">Medium +2</a>
               <a class="button is-rounded is-link is-small" onclick="updateRange(event, 2, 4);">Long +4</a>
             </div>
             <p class="section-title">Select Range (EasyShot™)</p>
-            <div class="buttons has-addons is-right">
+            <div class="buttons has-addons" style="display: flex; justify-content: center;">
               <a class="button is-rounded is-white is-small" onclick="updateRange(event, 3, 0);">Short</a>
               <a class="button is-rounded is-success is-small" onclick="updateRange(event, 4, 1);">Medium +1</a>
               <a class="button is-rounded is-link is-small" onclick="updateRange(event, 5, 2);">Long +2</a>
             </div>
             <p class="title is-1"><!-- White space for adjustment.--></p>
             <p class="section-title">Manual Mod +</p>
-            <div class="buttons has-addons is-right" id="manualModPlus">
+            <div class="buttons has-addons" id="manualModPlus" style="display: flex; justify-content: center;">
               <div class="field is-grouped">
                 <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 0, 0);" modValue=0>+0</a>
                 <a class="button is-rounded is-white is-small" onclick="updateManualModPlus(event, 1, 1);" modValue=1>+1</a>
@@ -443,7 +443,7 @@
               </div>
             </div>
             <p class="section-title">Manual Mod -</p>
-            <div class="buttons has-addons is-right" id="manualModMinus">
+            <div class="buttons has-addons" id="manualModMinus" style="display: flex; justify-content: center;">
               <div class="field is-grouped">
                 <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 0, 0);" modValue=0>-0</a>
                 <a class="button is-rounded is-white is-small" onclick="updateManualModMinus(event, 1, -1);" modValue=-1>-1</a>

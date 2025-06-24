@@ -981,6 +981,16 @@
   function updateTargetAero(evt, index, value) {
     var elem = document.getElementById('targetAero');
     var buttons = elem.getElementsByClassName('button');
+    // If already selected, deselect all (toggle off)
+    if (buttons[index].className.indexOf(' is-inverted') !== -1) {
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = buttons[i].className.replace(' is-inverted', '');
+      }
+      setDefaultAeroButtonColors();
+      targetAero = 0;
+      updateTargetAeroSum();
+      return;
+    }
     // Only one button selectable: deselect all, then select clicked
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(' is-inverted', '');
@@ -999,12 +1009,6 @@
         buttons[i].style.color = '#fff';
         buttons[i].style.border = '1.5px solid #ffab00';
       }
-    }
-    // If already selected, deselect all (toggle off)
-    if (evt.currentTarget.className.indexOf(' is-inverted') !== -1) {
-      targetAero = 0;
-      updateTargetAeroSum();
-      return;
     }
     // Select clicked button, apply inverted color
     buttons[index].className += ' is-inverted';

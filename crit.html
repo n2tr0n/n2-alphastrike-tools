@@ -99,6 +99,8 @@
     }
     /* Prevent table resize on selection: reserve space for bold font */
     #viewTable th, #viewTable td {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
       font-weight: 600;
       /* Use monospace numbers for less shifting */
       font-variant-numeric: tabular-nums;

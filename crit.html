@@ -37,13 +37,21 @@
       border-collapse: separate !important;
       border-spacing: 0;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,0.13);
+      border: none !important;
     }
     #viewTable th, #viewTable td {
       border-bottom: 1px solid #23272a !important;
+      border-right: none !important;
+      border-left: none !important;
+      border-top: none !important;
       padding: 0.35em 0.5em !important;
       text-align: left;
       background: transparent !important;
       white-space: nowrap !important;
+    }
+    /* Remove Bulma's default table borders */
+    .table.is-bordered, .table.is-bordered td, .table.is-bordered th {
+      border: none !important;
     }
     #viewTable th {
       color: #bfc9d1 !important;

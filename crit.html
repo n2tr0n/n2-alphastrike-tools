@@ -40,14 +40,21 @@
       border: none !important;
     }
     #viewTable th, #viewTable td {
-      border-bottom: 1px solid #23272a !important;
-      border-right: none !important;
+      border-bottom: 1px solid #3a3d42 !important; /* thin lighter grey line */
+      border-right: 1px solid #3a3d42 !important;  /* vertical separator */
       border-left: none !important;
       border-top: none !important;
       padding: 0.35em 0.5em !important;
       text-align: left;
       background: transparent !important;
       white-space: nowrap !important;
+    }
+    #viewTable th:last-child, #viewTable td:last-child {
+      border-right: none !important;
+    }
+    /* Remove zebra striping */
+    #viewTable tr:nth-child(even) td, #viewTable tr:nth-child(even) th {
+      background-color: transparent !important;
     }
     /* Remove Bulma's default table borders */
     .table.is-bordered, .table.is-bordered td, .table.is-bordered th {
@@ -60,9 +67,6 @@
     }
     #viewTable tr:last-child th, #viewTable tr:last-child td {
       border-bottom: none !important;
-    }
-    #viewTable tr:nth-child(even) td, #viewTable tr:nth-child(even) th {
-      background-color: #23272a !important;
     }
   </style>
 </head>

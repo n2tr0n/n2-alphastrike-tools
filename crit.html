@@ -79,15 +79,14 @@
       color: #ffe082 !important;
       transition: background 0.2s, color 0.2s;
     }
-    /* Gold highlight: make left border thinner and less visually heavy */
+    /* Gold highlight: match left border to right border style */
     #viewTable tr.is-selected th {
-      border-left: 1px solid #ffe082 !important;
+      border-left: 1px solid #3a3d42 !important; /* match normal right border color */
       border-radius: 4px 0 0 4px;
-      /* Remove extra box-shadow for less bulk */
       box-shadow: none !important;
     }
-    #viewTable tr.is-selected td:last-child {
-      border-radius: 0 4px 4px 0;
+    #viewTable tr.is-selected th.selected-gold {
+      border-left: 1px solid #ffe082 !important;
     }
     /* Prevent table resize on selection: reserve space for bold font */
     #viewTable th, #viewTable td {
@@ -168,11 +167,13 @@
     const table = document.getElementById("viewTable");
     for (let i = 0; i < table.rows.length; i++) {
       table.rows[i].classList.remove("is-selected");
+      if (table.rows[i].cells[0]) table.rows[i].cells[0].classList.remove("selected-gold");
     }
   };
   App.onClickButtonRoll = async function(buttonRoll){
     if( lastSelected) {
       lastSelected.classList.remove( "is-selected");
+      if (lastSelected.cells[0]) lastSelected.cells[0].classList.remove("selected-gold");
       await mySleep( 200);
     }
     // True 2d6 roll: each die is 1-6, sum for 2-12
@@ -183,8 +184,10 @@
     // Remove selection from all rows before adding new
     for (let i = 0; i < table.rows.length; i++) {
       table.rows[i].classList.remove("is-selected");
+      if (table.rows[i].cells[0]) table.rows[i].cells[0].classList.remove("selected-gold");
     }
     table.rows[rolld].classList.add( "is-selected");
+    if (table.rows[rolld].cells[0]) table.rows[rolld].cells[0].classList.add("selected-gold");
     lastSelected = table.rows[rolld];
   };
   function mySleep(time) {

@@ -52,9 +52,12 @@
     #viewTable th:last-child, #viewTable td:last-child {
       border-right: none !important;
     }
-    /* Remove zebra striping */
-    #viewTable tr:nth-child(even) td, #viewTable tr:nth-child(even) th {
+    /* Remove zebra striping completely and enforce dark background for all rows */
+    #viewTable tr td, #viewTable tr th {
       background-color: transparent !important;
+    }
+    #viewTable tbody tr td, #viewTable tbody tr th {
+      background-color: #181a1b !important;
     }
     /* Remove Bulma's default table borders */
     .table.is-bordered, .table.is-bordered td, .table.is-bordered th {

@@ -71,6 +71,29 @@
     #viewTable tr:last-child th, #viewTable tr:last-child td {
       border-bottom: none !important;
     }
+    #viewTable thead tr:last-child th {
+      border-bottom: 1.5px solid #3a3d42 !important; /* slightly thicker line for header-data separation */
+    }
+    #viewTable tr.is-selected th, #viewTable tr.is-selected td {
+      background-color: #31343a !important;
+      color: #ffe082 !important;
+      transition: background 0.2s, color 0.2s;
+    }
+    #viewTable tr.is-selected th {
+      border-left: 3px solid #ffe082 !important;
+      border-radius: 8px 0 0 8px;
+    }
+    #viewTable tr.is-selected td:last-child {
+      border-radius: 0 8px 8px 0;
+    }
+    #viewTable tr.is-selected td, #viewTable tr.is-selected th {
+      font-weight: 700;
+      box-shadow: 0 0 0 1px #ffe08233;
+    }
+    /* Fix for table row selection lingering after reroll */
+    #viewTable tr th, #viewTable tr td {
+      transition: background 0.2s, color 0.2s;
+    }
   </style>
 </head>
 <body>
@@ -125,6 +148,11 @@
   App.init = function(){
     const buttonRoll = document.querySelector("#buttonRoll");
     buttonRoll.addEventListener("click", App.onClickButtonRoll.bind(App, buttonRoll));
+    // Remove lingering selection on reload
+    const table = document.getElementById("viewTable");
+    for (let i = 0; i < table.rows.length; i++) {
+      table.rows[i].classList.remove("is-selected");
+    }
   };
   App.onClickButtonRoll = async function(buttonRoll){
     if( lastSelected) {
@@ -136,9 +164,12 @@
     window.crypto.getRandomValues(buf);
     var rolld = (buf[0] % 6 + 1) + (buf[1] % 6 + 1); // 2-12, bell curve
     var table = document.getElementById("viewTable");
+    // Remove selection from all rows before adding new
+    for (let i = 0; i < table.rows.length; i++) {
+      table.rows[i].classList.remove("is-selected");
+    }
     table.rows[rolld].classList.add( "is-selected");
     lastSelected = table.rows[rolld];
-    //window.alert( rolld);
   };
   function mySleep(time) {
     return new Promise( (resolve) => {

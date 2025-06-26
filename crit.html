@@ -79,16 +79,32 @@
       color: #ffe082 !important;
       transition: background 0.2s, color 0.2s;
     }
+    /* Gold highlight: make left border thinner and less visually heavy */
     #viewTable tr.is-selected th {
-      border-left: 3px solid #ffe082 !important;
-      border-radius: 8px 0 0 8px;
+      border-left: 2px solid #ffe082 !important;
+      border-radius: 6px 0 0 6px;
+      /* Remove extra box-shadow for less bulk */
+      box-shadow: none !important;
     }
     #viewTable tr.is-selected td:last-child {
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    /* Prevent table resize on selection: reserve space for bold font */
+    #viewTable th, #viewTable td {
+      font-weight: 600;
+      /* Use monospace numbers for less shifting */
+      font-variant-numeric: tabular-nums;
     }
     #viewTable tr.is-selected td, #viewTable tr.is-selected th {
-      font-weight: 700;
-      box-shadow: 0 0 0 1px #ffe08233;
+      font-weight: 600 !important; /* match normal weight, no jump */
+      color: #ffe082 !important;
+      background-color: #31343a !important;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: none !important;
+    }
+    /* Remove box-shadow from selected row for a cleaner look */
+    #viewTable tr.is-selected td, #viewTable tr.is-selected th {
+      box-shadow: none !important;
     }
     /* Fix for table row selection lingering after reroll */
     #viewTable tr th, #viewTable tr td {

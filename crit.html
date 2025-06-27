@@ -129,6 +129,31 @@
     #viewTable tr th, #viewTable tr td {
       transition: background 0.2s, color 0.2s;
     }
+    /* ====== Reset Button: Silvery, 3D, and Interactive ====== */
+    .sator-reset-btn {
+      background: linear-gradient(90deg,#e0e0e0 0%,#bfc9d1 100%);
+      color: #23272a;
+      font-weight: 700;
+      border: 2.5px solid #fff;
+      border-radius: 2em;
+      box-shadow: 0 3px 16px 0 rgba(180,180,180,0.22), 0 1.5px 0 #bfc9d1 inset;
+      padding: 0.5em 1.8em;
+      transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, transform 0.12s;
+      letter-spacing: 0.04em;
+      font-size: 1.15em;
+      outline: none;
+      position: relative;
+    }
+    .sator-reset-btn:hover {
+      box-shadow: 0 5px 18px 0 rgba(180,180,180,0.3), 0 2px 0 #bfc9d1 inset;
+      cursor: pointer;
+    }
+    .sator-reset-btn:active {
+      background: linear-gradient(90deg, #bfc9d1 0%, #e0e0e0 100%);
+      color: #23272a;
+      box-shadow: 0 2px 8px 0 rgba(100,100,100,0.2);
+      transform: translateY(1px);
+    }
   </style>
 </head>
 <body>
@@ -167,7 +192,7 @@
           </table>
         </div>
         <div class="columns is-centered" >
-            <input type="button" value="ROLL!" id="buttonRoll" class="button is-large">
+            <input type="button" value="Roll" id="buttonRoll" class="sator-reset-btn">
         </div>
       </div>
     </div>
@@ -191,6 +216,10 @@
     }
   };
   App.onClickButtonRoll = async function(buttonRoll){
+    // Add active state to button for visual feedback
+    buttonRoll.classList.add('is-active');
+    setTimeout(() => buttonRoll.classList.remove('is-active'), 300);
+    
     if( lastSelected) {
       lastSelected.classList.remove( "is-selected");
       if (lastSelected.cells[0]) lastSelected.cells[0].classList.remove("selected-gold");

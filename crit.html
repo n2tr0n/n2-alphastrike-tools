@@ -176,6 +176,17 @@
     font-weight: 600;
     margin-top: 0.2em;
   }
+  /* Fix: Add top border to Aerospace header cell */
+    #viewTable thead tr:nth-child(2) th:last-child {
+      border-top: 1px solid #3a3d42 !important;
+    }
+    /* Fix: Add rounded corners to bottom of table */
+    #viewTable tbody tr:last-child th {
+      border-bottom-left-radius: 10px;
+    }
+    #viewTable tbody tr:last-child td:last-child {
+      border-bottom-right-radius: 10px;
+    }
   </style>
 </head>
 <body>

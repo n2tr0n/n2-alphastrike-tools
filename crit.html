@@ -68,16 +68,19 @@
       font-weight: 600;
       width: 60%;
     }
-    #viewTable tr:last-child th, #viewTable tr:last-child td {
-      border-bottom: 1px solid transparent !important;
+    /* Remove special handling for last row's border */
+    /* #viewTable tr:last-child th, #viewTable tr:last-child td { border-bottom: 1px solid transparent !important; } */
+    #viewTable th, #viewTable td {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      font-weight: 600;
+      /* Use monospace numbers for less shifting */
+      font-variant-numeric: tabular-nums;
     }
-    #viewTable thead tr:last-child th {
-      border-bottom: 1.5px solid #3a3d42 !important; /* slightly thicker line for header-data separation */
-    }
-    #viewTable tr.is-selected th, #viewTable tr.is-selected td {
-      background-color: #31343a !important;
-      color: #ffe082 !important;
-      transition: background 0.2s, color 0.2s;
+    #viewTable tr.is-selected th,
+    #viewTable tr.is-selected td {
+      border-top-color: #ffe082 !important;
+      border-bottom-color: #ffe082 !important;
     }
     /* Gold highlight: match left border to right border style */
     #viewTable tr.is-selected th {

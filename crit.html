@@ -38,96 +38,76 @@
       border-spacing: 0;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,0.13);
       border: none !important;
+      table-layout: fixed; /* Prevent layout shifts */
     }
+    
+    /* Clean, consolidated table cell styling */
     #viewTable th, #viewTable td {
-      border-bottom: 1px solid #3a3d42 !important; /* thin lighter grey line */
-      border-right: 1px solid #3a3d42 !important;  /* vertical separator */
-      border-left: none !important;
-      border-top: none !important;
+      /* Reset all borders first */
+      border: none !important;
+      /* Set up consistent borders */
+      border-bottom: 1px solid #3a3d42 !important;
+      border-right: 1px solid #3a3d42 !important;
       padding: 0.35em 0.5em !important;
       text-align: left;
-      background: transparent !important;
+      background-color: #181a1b !important;
       white-space: nowrap !important;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums; /* For consistent number width */
+      transition: background 0.2s, color 0.2s;
     }
+    
+    /* Remove right border from last column */
     #viewTable th:last-child, #viewTable td:last-child {
       border-right: none !important;
     }
-    /* Remove zebra striping completely and enforce dark background for all rows */
-    #viewTable tr td, #viewTable tr th {
-      background-color: transparent !important;
+    
+    /* Special header styling */
+    #viewTable th {
+      color: #bfc9d1 !important;
+      width: 60%;
     }
-    #viewTable tbody tr td, #viewTable tbody tr th {
-      background-color: #181a1b !important;
+    
+    /* Special header-content separator */
+    #viewTable thead tr:last-child th {
+      border-bottom: 1.5px solid #3a3d42 !important;
     }
+    
     /* Remove Bulma's default table borders */
     .table.is-bordered, .table.is-bordered td, .table.is-bordered th {
       border: none !important;
     }
-    #viewTable th {
-      color: #bfc9d1 !important;
-      font-weight: 600;
-      width: 60%;
-    }
-    /* Remove special handling for last row's border */
-    /* #viewTable tr:last-child th, #viewTable tr:last-child td { border-bottom: 1px solid transparent !important; } */
-    #viewTable th, #viewTable td {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      font-weight: 600;
-      /* Use monospace numbers for less shifting */
-      font-variant-numeric: tabular-nums;
-    }
+    
+    /* Selection styling */
     #viewTable tr.is-selected th,
     #viewTable tr.is-selected td {
-      border-top-color: #ffe082 !important;
-      border-bottom-color: #ffe082 !important;
+      background-color: #31343a !important;
+      color: #ffe082 !important;
     }
-    /* Gold highlight: match left border to right border style */
-    #viewTable tr.is-selected th {
-      border-left: 1px solid #3a3d42 !important; /* match normal right border color */
-      border-radius: 4px 0 0 4px;
-      box-shadow: none !important;
-    }
-    #viewTable tr.is-selected th.selected-gold {
+    
+    /* Gold highlight borders */
+    #viewTable tr.is-selected th:first-child {
       border-left: 1px solid #ffe082 !important;
+      border-radius: 4px 0 0 4px;
     }
+    
     #viewTable tr.is-selected td:last-child {
       border-right: 1px solid #ffe082 !important;
       border-radius: 0 4px 4px 0;
     }
+    
+    /* Change border colors only, not dimensions */
     #viewTable tr.is-selected th,
     #viewTable tr.is-selected td {
-      border-top: 1px solid #ffe082 !important;
-      border-bottom: 1px solid #ffe082 !important;
-    }
-    /* Prevent table resize on selection: reserve space for bold font */
-    #viewTable th, #viewTable td {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      font-weight: 600;
-      /* Use monospace numbers for less shifting */
-      font-variant-numeric: tabular-nums;
-    }
-    #viewTable tr.is-selected th,
-    #viewTable tr.is-selected td {
-      border-top-color: #ffe082 !important;
       border-bottom-color: #ffe082 !important;
     }
-    /* Remove previous border-top/bottom style overrides for selected row */
-    #viewTable tr.is-selected td, #viewTable tr.is-selected th {
-      font-weight: 600 !important; /* match normal weight, no jump */
-      color: #ffe082 !important;
-      background-color: #31343a !important;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: none !important;
-    }
-    /* Remove box-shadow from selected row for a cleaner look */
-    #viewTable tr.is-selected td, #viewTable tr.is-selected th {
-      box-shadow: none !important;
-    }
-    /* Fix for table row selection lingering after reroll */
-    #viewTable tr th, #viewTable tr td {
-      transition: background 0.2s, color 0.2s;
+    
+    /* Add gold top border to the row after selected */
+    #viewTable tr.is-selected + tr th,
+    #viewTable tr.is-selected + tr td {
+      border-top-color: #ffe082 !important;
+      border-top-style: solid !important;
+      border-top-width: 1px !important;
     }
   </style>
 </head>

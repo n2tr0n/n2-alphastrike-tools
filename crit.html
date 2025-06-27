@@ -105,6 +105,12 @@
       /* Use monospace numbers for less shifting */
       font-variant-numeric: tabular-nums;
     }
+    #viewTable tr.is-selected th,
+    #viewTable tr.is-selected td {
+      border-top-color: #ffe082 !important;
+      border-bottom-color: #ffe082 !important;
+    }
+    /* Remove previous border-top/bottom style overrides for selected row */
     #viewTable tr.is-selected td, #viewTable tr.is-selected th {
       font-weight: 600 !important; /* match normal weight, no jump */
       color: #ffe082 !important;

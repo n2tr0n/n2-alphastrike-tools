@@ -222,6 +222,16 @@
       color: #00e676 !important;
       border: 1.5px solid #00e676 !important;
     }
+    #Target .hull-down {
+      background-color: #1976d2 !important;
+      color: #fff !important;
+      border: 1.5px solid #1976d2 !important;
+    }
+    #Target .hull-down.is-inverted {
+      background-color: #23272a !important;
+      color: #1976d2 !important;
+      border: 1.5px solid #1976d2 !important;
+    }
     #Target #targetAero .button.is-inverted {
       background-color: #23272a !important;
       color: #fff !important;
@@ -374,6 +384,7 @@
             <div class="buttons has-addons" id="targetJumpImmobile" style="display: flex; justify-content: center; margin-bottom:0.5em;">
               <a class="button is-rounded is-small attacker-jump" style="border:1.5px solid #ff1744; background-color:#ff1744; color:#fff;" onclick="updateTargetJump(event);">Jump</a>
               <a class="button is-rounded is-small attacker-stationary" style="border:1.5px solid #00e676; background-color:#00e676; color:#fff;" onclick="updateTargetAdvanced(event, 0, -4);">Immobile</a>
+              <a class="button is-rounded is-small hull-down" onclick="updateTargetHullDown(event);">Hull Down</a>
             </div>
             <p class="section-title">Aerospace Movement</p>
             <div class="buttons has-addons" id="targetAero" style="display: flex; justify-content: center;">
@@ -703,6 +714,33 @@
       return;
     }
     sumModifierValue();
+  }
+
+  function updateTargetHullDown(evt) {
+    var elem = document.getElementById('targetJumpImmobile');
+    var buttons = elem.getElementsByClassName('button');
+    // Hull Down is the third button (index 2)
+    if (buttons[2].className.indexOf(' is-inverted') !== -1) {
+      // Deselecting Hull Down
+      buttons[2].className = buttons[2].className.replace(' is-inverted', '');
+    } else {
+      // Selecting Hull Down
+      buttons[2].className += ' is-inverted';
+      // Unselect Jump and Immobile if selected
+      buttons[0].className = buttons[0].className.replace(' is-inverted', '');
+      buttons[1].className = buttons[1].className.replace(' is-inverted', '');
+      // Unselect all TMM buttons when Hull Down is pressed (TMM becomes 0)
+      var tmmElem = document.getElementById('targetBasic');
+      var tmmButtons = tmmElem.getElementsByClassName('button');
+      for (var i = 0; i < tmmButtons.length; i++) {
+        tmmButtons[i].className = tmmButtons[i].className.replace(' is-black', '');
+        tmmButtons[i].className = tmmButtons[i].className.replace(' is-active', '');
+        tmmButtons[i].className = tmmButtons[i].className.replace(' is-white', '');
+        tmmButtons[i].className += ' is-white';
+      }
+    }
+    // Let updateTargetAeroSum handle the calculation
+    updateTargetAeroSum();
   }
 
   // Track each 'Other' group value separately
@@ -1081,6 +1119,10 @@
     if (jumpImmobileBtns[1].className.indexOf(' is-inverted') !== -1) {
       tmm = -4;
     }
+    // If Hull Down is on, override TMM with 0 and add +1 modifier
+    if (jumpImmobileBtns[2].className.indexOf(' is-inverted') !== -1) {
+      tmm = 1; // TMM = 0 + 1 modifier
+    }
     // Add aerospace movement
     var table = document.getElementById('viewTable');
     table.rows[2].cells[1].firstChild.data = tmm + targetAero;
@@ -1100,6 +1142,11 @@
   var orig_updateTargetAdvanced = updateTargetAdvanced;
   updateTargetAdvanced = function(evt, num, value) {
     orig_updateTargetAdvanced(evt, num, value);
+    updateTargetAeroSum();
+  }
+  var orig_updateTargetHullDown = updateTargetHullDown;
+  updateTargetHullDown = function(evt) {
+    orig_updateTargetHullDown(evt);
     updateTargetAeroSum();
   }
 

@@ -647,20 +647,9 @@
     for (i = 0; i < advButtons.length; i++) {
       advButtons[i].className = advButtons[i].className.replace(' is-inverted', '');
     }
-    //If jump is on, add +1.
-    var jumpImmobileElem = document.getElementById('targetJumpImmobile');
-    var jumpImmobileBtns = jumpImmobileElem.getElementsByClassName('button');
-    var tmm = num;
-    if (jumpImmobileBtns[0].className.indexOf(' is-inverted') != -1) {
-      tmm = tmm + 1;
-    }
-    // If Immobile is on, override with -4
-    if (jumpImmobileBtns[1].className.indexOf(' is-inverted') != -1) {
-      tmm = -4;
-    }
-    var table = document.getElementById('viewTable');
-    table.rows[2].cells[1].firstChild.data = tmm;
-    sumModifierValue();
+    
+    // Call updateTargetAeroSum instead of manually calculating
+    updateTargetAeroSum();
   }
   function updateTargetJump(evt) {
     var elem = document.getElementById('targetJumpImmobile');
